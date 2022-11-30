@@ -10,7 +10,6 @@ module.exports = {
       },
       user_id: {
         allowNull: false,
-        autoIncrement: true,
         type: Sequelize.INTEGER,
         references: {
           model: 'users',
@@ -19,7 +18,6 @@ module.exports = {
       },
       seller_id: {
         allowNull: false,
-        autoIncrement: true,
         type: Sequelize.INTEGER,
         references: {
           model: 'users',
