@@ -23,4 +23,16 @@ const login = async (req, res) => {
   res.status(201).json({ ...payload, token });
 };
 
-module.exports = { login };
+const register = async (req, res) => {
+  const { name, password, email, role } = req.body;
+
+  const user = await service.login(email, password);
+
+  if (user) return res.status(409).json({ message: "User already registered" });
+
+  await service.register({ name, password, email, role });
+
+  res.status(201).json()
+};
+
+module.exports = { login, register };

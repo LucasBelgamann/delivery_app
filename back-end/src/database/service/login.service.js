@@ -8,4 +8,9 @@ const login = async (email, password) => {
   return user;
 };
 
-module.exports = { login };
+const register = async (name, email, password, role) => {
+  const newUser = await users.create(name, email, password, role);
+  return newUser;
+}
+
+module.exports = { login, register };
