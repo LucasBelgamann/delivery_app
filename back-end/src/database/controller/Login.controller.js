@@ -7,6 +7,9 @@ const login = async (req, res) => {
   const user = await service.login(email, password);
 
   if (!user) return res.status(404).json({ message: "User not found" });
+  if (!password === md5(user.dataValues.password)) {
+    return res.status(404).json({ message: "invalid password" });
+  }
 
   const payload = {
     name: user.dataValues.name,
