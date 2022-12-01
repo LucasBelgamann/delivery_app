@@ -12,7 +12,7 @@ module.exports = (sequelize,DataTypes) => {
     total_price: DataTypes.DECIMAL(9,2),
     delivery_address: DataTypes.STRING(100),
     delivery_number:DataTypes.STRING(50),
-    sale_date: DataTypes.DATETIME,
+    sale_date: DataTypes.DATE,
     status: DataTypes.STRING(50),
   }, {
     underscore: true,
