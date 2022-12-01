@@ -1,26 +1,23 @@
 const service = require("../service/login.service");
-const jwt = require('jsonwebtoken');
+const { createToken } = require("../../utils/token");
+const md5 = require("md5");
 
-require("dotenv").config();
-
-const { JWT_SECRET } = process.env || "secret";
-
-const createUser = async (req, res) => {
+const login = async (req, res) => {
   const { password, email } = req.body;
-  const user = await service.createUser(email, password);
-  if (!user)
-    return res.status(404).json({ message: "User already registered" });
+  const user = await service.login(email, password);
+
+  if (!user) return res.status(404).json({ message: "User not found" });
 
   const payload = {
-    email,
+    name: user.dataValues.name,
+    email: user.dataValues.email,
+    password: md5(user.dataValues.password),
+    role: user.dataValues.role,
   };
 
-  const token = jwt.sign(payload, JWT_SECRET, {
-    expiresIn: "1h",
-    algorithm: "HS256",
-  });
+  const token = createToken(payload);
 
-  res.status(201).json({ token });
+  res.status(201).json({ ...payload, token });
 };
 
-module.exports = { createUser };
+module.exports = { login };
