@@ -3,7 +3,7 @@ const { users } = require("../models");
 
 const login = async (email, password) => {
   const user = await users.findOne({
-    where: { email, password }});
+    where: { email}});
     console.log(user);
   return user;
 };

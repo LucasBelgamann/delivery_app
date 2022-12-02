@@ -20,7 +20,7 @@ const login = async (req, res) => {
 
   const token = createToken(payload);
 
-  res.status(201).json({ ...payload, token });
+  res.status(200).json({ ...payload, token });
 };
 
 const register = async (req, res) => {

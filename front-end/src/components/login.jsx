@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import apiLogin from '../utils/api';
 
 function Login() {
@@ -6,11 +7,13 @@ function Login() {
     email: '',
     password: '',
   });
+
   const [disabledBtn, setDisabledBtn] = useState(true);
+  const history = useHistory();
 
   const handleChange = ({ target: { name, value } }) => {
     setLogin((oldState) => ({ ...oldState, [name]: value }));
-    const tamMin = 6;
+    const tamMin = 5;
     const regex = /\w+@[a-z]+.com/g;
     if (loginInput.email.match(regex) && loginInput.password.length >= tamMin) {
       setDisabledBtn(false);
@@ -19,9 +22,12 @@ function Login() {
     }
   };
 
-  const handleSubmit = async ({ event }) => {
-    event.preventDefault();
-    await apiLogin(loginInput);
+  const handleSubmit = async () => {
+    apiLogin.post('/login', loginInput).then(({ data }) => {
+      console.log('data', data);
+      history.push('/customer/products');
+      return data;
+    });
   };
 
   return (
@@ -43,9 +49,9 @@ function Login() {
             name="password"
           />
           <button
-            type="submit"
+            type="button"
             data-testid="common_login__button-login"
-            onSubmit={ handleSubmit }
+            onClick={ handleSubmit }
             disabled={ disabledBtn }
           >
             Login
