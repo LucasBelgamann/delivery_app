@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import apiLogin from '../utils/api';
 
-function Login() {
+function Register() {
   const [loginInput, setLogin] = useState({
     email: '',
     password: '',
@@ -13,9 +13,12 @@ function Login() {
 
   const handleChange = ({ target: { name, value } }) => {
     setLogin((oldState) => ({ ...oldState, [name]: value }));
-    const tamMin = 5;
+    const PASSMIN = 5;
+    const NAMEMIN = 12;
     const regex = /\w+@[a-z]+.com/g;
-    if (loginInput.email.match(regex) && loginInput.password.length >= tamMin) {
+    if (loginInput.email.match(regex)
+      && loginInput.password.length >= PASSMIN
+      && loginInput.nome.length >= NAMEMIN) {
       setDisabledBtn(false);
     } else {
       return setDisabledBtn(true);
@@ -24,7 +27,6 @@ function Login() {
 
   const handleSubmit = async () => {
     apiLogin.post('/login', loginInput).then(({ data }) => {
-      // console.log('data', data);
       history.push('/customer/products');
       return data;
     });
@@ -34,45 +36,55 @@ function Login() {
     <div>
       <div>
         <form>
-          <p> Nome do seu app </p>
-          <label htmlFor="email">
-            Login:
+          <label htmlFor="nome">
+            Nome:
             <input
+              id="nome"
+              type="nome"
+              data-testid="common_register__input-name"
+              value={ loginInput.nome }
+              onChange={ handleChange }
+              name="nome"
+              placeholder="seu nome"
+            />
+          </label>
+          <label htmlFor="email">
+            Email:
+            <input
+              id="email"
               type="email"
-              data-testid="common_login__input-email"
+              data-testid="common_register__input-email"
               value={ loginInput.email }
               onChange={ handleChange }
               name="email"
-              placeholder="email"
+              placeholder="seu-email@site.com.br"
             />
           </label>
           <label htmlFor="password">
             Senha:
             <input
+              id="password"
               type="password"
-              data-testid="common_login__input-password"
+              data-testid="common_register__input-password"
               value={ loginInput.password }
               onChange={ handleChange }
               name="password"
-              placeholder="password"
+              placeholder="********"
             />
           </label>
           <button
             type="button"
-            data-testid="common_login__button-login"
+            data-testid="common_register__button-register"
             onClick={ handleSubmit }
             disabled={ disabledBtn }
           >
-            LOGIN
+            CADASTRAR
           </button>
-          <button type="submit" data-testid="common_login__button-register">
-            Ainda não tenho conta
-          </button>
-          <p data-testid="common_login__element-invalid-email" />
+          <p data-testid="common_register__element-invalid_register" />
         </form>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default Register;
