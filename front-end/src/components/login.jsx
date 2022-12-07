@@ -24,7 +24,6 @@ function Login() {
 
   const handleSubmit = async () => {
     apiLogin.post('/login', loginInput).then(({ data }) => {
-      // console.log('data', data);
       history.push('/customer/products');
       return data;
     });
@@ -65,7 +64,11 @@ function Login() {
           >
             LOGIN
           </button>
-          <button type="submit" data-testid="common_login__button-register">
+          <button
+            type="submit"
+            data-testid="common_login__button-register"
+            onClick={ () => history.push('/register') }
+          >
             Ainda não tenho conta
           </button>
           <p data-testid="common_login__element-invalid-email" />
