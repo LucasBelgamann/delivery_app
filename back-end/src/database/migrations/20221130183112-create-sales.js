@@ -11,6 +11,7 @@ module.exports = {
       user_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        foreignKey: true,
         references: {
           model: 'users',
           key: 'id'
@@ -19,6 +20,7 @@ module.exports = {
       seller_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        foreignKey: true,
         references: {
           model: 'users',
           key: 'id'
