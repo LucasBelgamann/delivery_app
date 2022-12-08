@@ -1,7 +1,8 @@
- function formatCurrency(value) {
-  return new Intl.NumberFormat('pt-br',
-    { style: 'currency', currency: 'BRL'})
-    .format(value);
+function formatCurrency(value) {
+  return new Intl.NumberFormat('pt-br', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(value);
 }
 
-module.exports = {formatCurrency};
+module.exports = { formatCurrency };
