@@ -3,25 +3,6 @@ const { createSaleProducts } = require("./salesProducts.service");
 const { getUser } = require("./login.service");
 const { formatCurrency } = require("../../utils/formatCurrency");
 
-const createSale = async ({
-  seller_id,
-  total_price,
-  delivery_address,
-  delivery_number,
-  user,
-}) => {
-  const userId = await getUser(user.email);
-
-  const sale = await sales.create({
-    user_id: userId,
-    seller_id,
-    total_price,
-    delivery_address,
-    delivery_number,
-  });
-  return sale;
-};
-
 const create = async ({
   seller_id,
   total_price,
@@ -31,13 +12,16 @@ const create = async ({
   user,
 }) => {
   console.log("products", products);
-  const sale = await createSale({
-    user,
+  const userId = await getUser(user.email);
+
+  const sale = await sales.create({
+    user_id: userId,
     seller_id,
     total_price,
     delivery_address,
     delivery_number,
   });
+
   console.log("sale.id", sale.id);
 
 
