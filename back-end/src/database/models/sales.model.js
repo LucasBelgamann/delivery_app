@@ -12,10 +12,10 @@ module.exports = (sequelize,DataTypes) => {
     total_price: DataTypes.DECIMAL(9,2),
     delivery_address: DataTypes.STRING(100),
     delivery_number:DataTypes.STRING(50),
-    sale_date: DataTypes.DATE,
-    status: DataTypes.STRING(50),
+    sale_date: {type: DataTypes.DATE, defaultValue: DataTypes.NOW},
+    status: { type: DataTypes.STRING(50), defaultValue: 'Pendente' },
   }, {
-    underscore: true,
+    // underscore: true,
     tableName: 'sales',
     timestamps: false,
   });
@@ -25,6 +25,7 @@ module.exports = (sequelize,DataTypes) => {
       {foreignKey:'user_id', as: 'user'},
       {foreignKey:'seller_id', as: 'seller'});
   }
+
 
   return sales;
 

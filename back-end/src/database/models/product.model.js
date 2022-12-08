@@ -7,14 +7,14 @@ module.exports = (sequelize,DataTypes) => {
     price: DataTypes.DECIMAL(4,2),
     url_image: DataTypes.STRING(200),
   }, {
-    underscore: true,
+    // underscore: true,
     tableName: 'products',
     timestamps: false,
   });
 
   products.associate = (models) => {
     products.hasMany(models.salesProducts,
-      {foreignKey: 'product_id' , as: 'productId'})
+      {foreignKey: 'product_id' , as: 'products'})
   }
 
   return products;
