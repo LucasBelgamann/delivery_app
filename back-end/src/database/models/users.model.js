@@ -8,16 +8,16 @@ module.exports = (sequelize,DataTypes) => {
     password: DataTypes.STRING(255),
     role: DataTypes.STRING(255),
   }, {
-    underscore: true,
+    // underscore: true,
     tableName: 'users',
     timestamps: false,
   });
 
   users.associate = (models) => {
-    users.hasMany(models.sales, 
-      {foreignKey: 'user_id', as: 'user'}, 
-      {foreignKey: 'seller_id', as: 'seller'});
-  }
+    users.hasMany(models.sales,{ foreignKey: 'user_id', as: 'customer' });
+    users.hasMany(models.sales,{ foreignKey: 'seller_id', as: 'seller' });
+  };
+
 
   return users;
 

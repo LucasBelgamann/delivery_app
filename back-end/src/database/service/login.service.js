@@ -13,4 +13,10 @@ const register = async (name, email, password, role) => {
   return newUser;
 }
 
-module.exports = { login, register };
+
+const getUser = async (email) => {
+  const { dataValues } = await users.findOne({ where: { email } });
+  return dataValues.id;
+}
+
+module.exports = { login, register, getUser };

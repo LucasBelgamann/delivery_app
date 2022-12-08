@@ -5,15 +5,17 @@ module.exports = (sequelize, DataTypes) => {
       sale_id: {
         type: DataTypes.INTEGER,
         foreignKey: true,
+        primaryKey: true 
       },
       product_id: {
         type: DataTypes.INTEGER,
         foreignKey: true,
+        primaryKey: true 
       },
       quantity: DataTypes.INTEGER,
     },
     {
-      underscore: true,
+      // underscore: true,
       tableName: "salesProducts",
       timestamps: false,
     }
@@ -27,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: "product_id",
     });
 
-    models.products.belongsToMany(models.products, {
+    models.products.belongsToMany(models.sales, {
       as: "sales",
       through: salesProducts,
       foreignKey: "product_id",
