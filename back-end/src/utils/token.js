@@ -21,7 +21,6 @@ const validateToken = (token) => {
 const authenticateToken = async (req, res, next) => {
   const { authorization } = req.headers;
 
-
   if (!authorization || authorization === '') {
     return res.status(401).json({ message: 'Token not found' });
   }
