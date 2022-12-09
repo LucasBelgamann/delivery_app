@@ -1,7 +1,7 @@
 const { sales, users, products, salesProducts } = require("../models");
 const { createSaleProducts } = require("./salesProducts.service");
 const { getUser } = require("./login.service");
-const { formatCurrency } = require("../../utils/formatCurrency");
+// const { formatCurrency } = require("../../utils/formatCurrency");
 
 const create = async ({
   seller_id,
@@ -21,14 +21,12 @@ const create = async ({
     delivery_address,
     delivery_number,
   });
-
   console.log("sale.id", sale.id);
-
 
   await createSaleProducts({
     products,
     sale_id: sale.id,
-  })
+  });
 
   return sale.id;
 };
