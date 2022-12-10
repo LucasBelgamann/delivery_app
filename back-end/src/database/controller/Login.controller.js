@@ -30,9 +30,15 @@ const register = async (req, res) => {
 
   if (user) return res.status(409).json({ message: "User already registered" });
 
-  await service.register({ name, password, email, role });
+  const register = await service.register({ name, password: md5(password), email, role });
 
-  res.status(201).json()
+  const token = createToken({email, password: md5(password)});
+  return res.status(201).json({ ...register, token });
 };
 
-module.exports = { login, register };
+const getAll = async (_req, res) => {
+  const users = await service.getAll();
+  return res.status(200).json(users);
+};
+
+module.exports = { login, register, getAll };
