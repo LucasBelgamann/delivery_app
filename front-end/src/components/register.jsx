@@ -4,6 +4,7 @@ import apiLogin from '../utils/api';
 
 function Register() {
   const [loginInput, setLogin] = useState({
+    name: '',
     email: '',
     password: '',
   });
@@ -18,7 +19,7 @@ function Register() {
     const regex = /\w+@[a-z]+.com/g;
     if (loginInput.email.match(regex)
       && loginInput.password.length >= PASSMIN
-      && loginInput.nome.length >= NAMEMIN) {
+      && loginInput.name.length >= NAMEMIN) {
       setDisabledBtn(false);
     } else {
       return setDisabledBtn(true);
@@ -26,7 +27,7 @@ function Register() {
   };
 
   const handleSubmit = async () => {
-    apiLogin.post('/login', loginInput).then(({ data }) => {
+    apiLogin.post('/register', loginInput).then(({ data }) => {
       history.push('/customer/products');
       return data;
     });
@@ -36,15 +37,15 @@ function Register() {
     <div>
       <div>
         <form>
-          <label htmlFor="nome">
+          <label htmlFor="name">
             Nome:
             <input
-              id="nome"
-              type="nome"
+              id="name"
+              type="name"
               data-testid="common_register__input-name"
-              value={ loginInput.nome }
+              value={ loginInput.name }
               onChange={ handleChange }
-              name="nome"
+              name="name"
               placeholder="seu nome"
             />
           </label>
