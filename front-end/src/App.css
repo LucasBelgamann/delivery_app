@@ -1,54 +1,37 @@
-.App {
-  align-items: center;
-  background: #0fa36b;
-  color: #464646;
+.products-container {
   display: flex;
-  flex-direction: column;
-  font-family: sans-serif;
-  height: 100vh;
-  justify-content: center;
+  flex-wrap: wrap;
+  margin-left: 30px;
   width: 100%;
 }
 
-.App > .logo {
-  animation: shake 1.5s infinite ease;
-  color: aliceblue;
-  font-family: Montserrat , sans-serif;
-  font-size: 3em;
-  font-weight: 900;
+.products-container div {
+  background-color: #3333;
+  margin: 20px;
+  width: 280px;
 }
 
-.rocksGlass {
-  animation: shake 1s infinite ease;
-  max-height: 80vh;
+.nav-products {
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 }
 
-@keyframes shake {
-
-  0% {
-    transform: rotate(5deg);
-  }
-
-  50% {
-    transform: rotate(-5deg);
-  }
-
-  100% {
-    transform: rotate(5deg);
-  }
+.nav-item {
+  align-items: center;
+  display: flex;
+  margin-left: 10px;
 }
 
-@keyframes clink {
+.nav-item h2 {
+  padding: 20px;
+}
 
-  0% {
-    transform: rotate(-10deg);
-  }
-
-  50% {
-    transform: rotate(20deg);
-  }
-
-  100% {
-    transform: rotate(-10deg);
-  }
+.product {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
