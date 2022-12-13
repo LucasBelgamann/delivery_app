@@ -1,14 +1,14 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import Login from '../components/login';
-import Register from '../components/register';
-import CustomProducts from '../components/customer/products';
-import CustomCheckout from '../components/customer/checkout';
-import CustomOrdersId from '../components/customer/ordersId';
-import CustomOrdersIdVenda from '../components/customer/ordersIdVenda';
-import SellOrders from '../components/seller/orders';
-import SellOrdersId from '../components/seller/ordersId';
-import AdminManage from '../components/admin/manage';
+import Login from '../pages/login';
+import Register from '../pages/register';
+import CustomProducts from '../pages/customer/products';
+import CustomCheckout from '../pages/customer/checkout';
+import CustomOrdersId from '../pages/customer/ordersId';
+import CustomOrdersIdVenda from '../pages/customer/ordersIdVenda';
+import SellOrders from '../pages/seller/orders';
+import SellOrdersId from '../pages/seller/ordersId';
+import AdminManage from '../pages/admin/manage';
 
 function Routes() {
   return (
