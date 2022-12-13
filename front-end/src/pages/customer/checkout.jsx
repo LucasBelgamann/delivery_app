@@ -33,7 +33,7 @@ function Checkout() {
   const submit = () => {
     postData('sales', postAdress);
     alert('Compra realizada com sucesso');
-    history.push('/customer/sales/:id');
+    history.push('/customer/orders/:id');
   };
 
   const get = async () => {
