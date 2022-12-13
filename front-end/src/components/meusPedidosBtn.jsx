@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function MeusPedidosBtn() {
   return (
     <Link
-      data-testid="header__show_home_btn"
+      data-testid="customer_products__element-navbar-link-orders"
       to="/customer/products"
     >
       Meus Pedidos

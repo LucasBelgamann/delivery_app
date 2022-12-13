@@ -27,27 +27,25 @@ function Header() {
       >
         { roleUserPerson(role) }
       </h1>
-      <div className="buttons-content">
-        { roleUserPerson(role) === null
-          ? <MeusPedidosBtn data-testid="customer_products__element-navbar-link-orders" />
-          : null}
-        <p data-testid="customer_products__element-navbar-user-full-name">
-          { userName }
-        </p>
-        {
-          (logged)
-            ? (
-              <button
-                type="button"
-                onClick={ () => logoff() }
-                data-testid="customer_products__element-navbar-link-logout"
-              >
-                Sair
-              </button>
-            )
-            : null
-        }
-      </div>
+      { roleUserPerson(role) === null
+        ? <MeusPedidosBtn />
+        : null}
+      <p data-testid="customer_products__element-navbar-user-full-name">
+        { userName }
+      </p>
+      {
+        (logged)
+          ? (
+            <button
+              type="button"
+              onClick={ () => logoff() }
+              data-testid="customer_products__element-navbar-link-logout"
+            >
+              Sair
+            </button>
+          )
+          : null
+      }
     </header>
   );
 }
