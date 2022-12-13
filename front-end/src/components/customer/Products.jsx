@@ -1,23 +1,29 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import apiLogin from '../../utils/api';
 import { formatCurrency } from '../../utils/formatCurrency';
 import Context from '../../context/context';
-import NavProducts from '../navBar/NavProducts';
 
 function Products() {
-  const { products, setProducts } = useContext(Context);
-  const [counter, setCounter] = useState([]);
+  const { products, setProducts, counter, setCounter, qty, setQty } = useContext(Context);
+
   const get = async () => {
     const { data } = await apiLogin.get('/customer/products');
     setProducts(data);
   };
+
   useEffect(() => {
     get();
   }, []);
 
-  // useEffect(() => {
-  //   console.log('eiiiii', counter);
-  // }, [counter]);
+  useEffect(() => {
+    console.log('eiiiii', counter);
+    const total = counter.reduce(
+      (acc, { quantity, value }) => acc + quantity * Number(value.price),
+      0,
+    );
+    setQty(total);
+    console.log(qty);
+  }, [counter, qty]);
 
   const handleAddToCart = (value) => {
     setCounter((prevState) => {
@@ -73,7 +79,6 @@ function Products() {
 
   return (
     <div>
-      <NavProducts />
       <div className="products-container">
         {products.map((product) => (
           <div key={ product.id } className="product">
@@ -92,19 +97,24 @@ function Products() {
               >
                 -
               </button>
-              {counter.map(({ quantity, value }) => (
-                value.name === product.name && <p key={ product.name }>{quantity}</p>
-              ))}
-              <button
-                type="button"
-                onClick={ () => handleAddToCart(product) }
-              >
+              {counter.map(
+                ({ quantity, value }) => value.name === product.name && (
+                  <p key={ product.name }>{quantity}</p>
+                ),
+              )}
+              <button type="button" onClick={ () => handleAddToCart(product) }>
                 +
               </button>
             </div>
           </div>
         ))}
       </div>
+      <button type="button">
+        Ver carrinho:
+        {' '}
+        {qty.toFixed(2)}
+        {' '}
+      </button>
     </div>
   );
 }
