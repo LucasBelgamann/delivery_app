@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
 import Routes from './routes/routes';
+import ThisProvider from './context/Provider';
 
 function App() {
   return (
-    <div className="App">
+    <ThisProvider>
       <Routes />
-    </div>
+    </ThisProvider>
   );
 }
 
