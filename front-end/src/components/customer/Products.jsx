@@ -15,9 +15,9 @@ function Products() {
     get();
   }, []);
 
-  useEffect(() => {
-    console.log('eiiiii', counter);
-  }, [counter]);
+  // useEffect(() => {
+  //   console.log('eiiiii', counter);
+  // }, [counter]);
 
   const handleAddToCart = (value) => {
     setCounter((prevState) => {
@@ -35,17 +35,13 @@ function Products() {
       const newCartItems = [...prevState];
       const item = newCartItems[itemIndex];
 
-      console.log(item.quantity);
-
       newCartItems[itemIndex] = {
         ...item,
         quantity: item.quantity + 1,
       };
 
-      console.log(newCartItems);
       return newCartItems;
     });
-    console.log(value);
     console.log(counter);
   };
 
@@ -72,6 +68,7 @@ function Products() {
         return newCartItems;
       });
     }
+    console.log(counter);
   };
 
   return (
@@ -88,20 +85,16 @@ function Products() {
               height="150px"
             />
             <h4>{product.name}</h4>
-            <div className="btn-moreLess" key={ product.name }>
+            <div className="btn-moreLess">
               <button
                 type="button"
                 onClick={ () => handleDecrementCartItem(product) }
               >
                 -
               </button>
-              <spam>
-                {' '}
-                {counter.forEach((e) => (
-                  <p>{e}</p>
-                ))}
-
-              </spam>
+              {counter.map(({ quantity, value }) => (
+                value.name === product.name && <p key={ product.name }>{quantity}</p>
+              ))}
               <button
                 type="button"
                 onClick={ () => handleAddToCart(product) }
