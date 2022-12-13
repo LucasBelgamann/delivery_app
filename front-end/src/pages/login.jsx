@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import apiLogin from '../utils/api';
+import SubmitBtn from '../components/submitBtn';
 
 function Login() {
   const [loginInput, setLogin] = useState({
@@ -22,18 +22,11 @@ function Login() {
     }
   };
 
-  const handleSubmit = async () => {
-    apiLogin.post('/login', loginInput).then(({ data }) => {
-      history.push('/customer/products');
-      return data;
-    });
-  };
-
   return (
     <div>
       <div>
         <form>
-          <p> Nome do seu app </p>
+          <p>John Entrega!</p>
           <label htmlFor="email">
             Login:
             <input
@@ -56,14 +49,14 @@ function Login() {
               placeholder="password"
             />
           </label>
-          <button
-            type="button"
-            data-testid="common_login__button-login"
-            onClick={ handleSubmit }
-            disabled={ disabledBtn }
-          >
-            LOGIN
-          </button>
+          <SubmitBtn
+            dataTestid="common_login__button-login"
+            routeSuffix="login"
+            sendObject={ loginInput }
+            navigation="/customer/products"
+            btnName="LOGIN"
+            disabledBtn={ disabledBtn }
+          />
           <button
             type="submit"
             data-testid="common_login__button-register"

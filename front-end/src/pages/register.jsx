@@ -1,16 +1,15 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import apiLogin from '../utils/api';
+import SubmitBtn from '../components/submitBtn';
 
 function Register() {
   const [loginInput, setLogin] = useState({
     name: '',
     email: '',
     password: '',
+    role: 'customer',
   });
 
   const [disabledBtn, setDisabledBtn] = useState(true);
-  const history = useHistory();
 
   const handleChange = ({ target: { name, value } }) => {
     setLogin((oldState) => ({ ...oldState, [name]: value }));
@@ -24,13 +23,6 @@ function Register() {
     } else {
       return setDisabledBtn(true);
     }
-  };
-
-  const handleSubmit = async () => {
-    apiLogin.post('/register', loginInput).then(({ data }) => {
-      history.push('/customer/products');
-      return data;
-    });
   };
 
   return (
@@ -73,14 +65,14 @@ function Register() {
               placeholder="********"
             />
           </label>
-          <button
-            type="button"
-            data-testid="common_register__button-register"
-            onClick={ handleSubmit }
-            disabled={ disabledBtn }
-          >
-            CADASTRAR
-          </button>
+          <SubmitBtn
+            dataTestid="common_register__button-register"
+            routeSuffix="register"
+            sendObject={ loginInput }
+            navigation="/customer/products"
+            btnName="CADASTRAR"
+            disabledBtn={ disabledBtn }
+          />
           <p data-testid="common_register__element-invalid_register" />
         </form>
       </div>
