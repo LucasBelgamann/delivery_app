@@ -5,5 +5,6 @@ const router = Router();
 
 router.get('/', loginController.getAll);
 router.post('/', loginController.login);
+router.get('/seller', loginController.getSellers)
 
 module.exports = router;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import Login from '../pages/login';
 import Register from '../pages/register';
-import CustomProducts from '../pages/customer/products';
+import CustomProducts from '../pages/customer/Products';
 import CustomCheckout from '../pages/customer/checkout';
 import CustomOrdersId from '../pages/customer/ordersId';
 import CustomOrdersIdVenda from '../pages/customer/ordersIdVenda';

@@ -1,10 +1,13 @@
 import { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import apiLogin from '../../utils/api';
 import { formatCurrency } from '../../utils/formatCurrency';
 import Context from '../../context/context';
+import Navbar from '../../components/navbar';
 
 function Products() {
   const { products, setProducts, counter, setCounter, qty, setQty } = useContext(Context);
+  const history = useHistory();
 
   const get = async () => {
     const { data } = await apiLogin.get('/customer/products');
@@ -22,7 +25,6 @@ function Products() {
       0,
     );
     setQty(total);
-    console.log(qty);
   }, [counter, qty]);
 
   const handleAddToCart = (value) => {
@@ -48,7 +50,6 @@ function Products() {
 
       return newCartItems;
     });
-    console.log(counter);
   };
 
   const handleDecrementCartItem = (value) => {
@@ -74,22 +75,31 @@ function Products() {
         return newCartItems;
       });
     }
-    console.log(counter);
   };
 
   return (
     <div>
+      <Navbar />
       <div className="products-container">
         {products.map((product) => (
           <div key={ product.id } className="product">
-            <h6>{formatCurrency(product.price)}</h6>
+            <h6
+              data-testid={ `customer_products__element-card-price-${product.id}` }
+            >
+              {formatCurrency(product.price)}
+            </h6>
             <img
+              data-testid={ `customer_products__img-card-bg-image-${product.id}` }
               src={ product.url_image }
               alt={ product.name }
               width="150px"
               height="150px"
             />
-            <h4>{product.name}</h4>
+            <h4
+              data-testid={ ` customer_products__element-card-title-${product.id}` }
+            >
+              {product.name}
+            </h4>
             <div className="btn-moreLess">
               <button
                 type="button"
@@ -109,7 +119,11 @@ function Products() {
           </div>
         ))}
       </div>
-      <button type="button">
+      <button
+        type="button"
+        className="cart-total"
+        onClick={ () => history.push('/customer/checkout') }
+      >
         Ver carrinho:
         {' '}
         {qty.toFixed(2)}

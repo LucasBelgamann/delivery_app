@@ -5,11 +5,21 @@ import Context from './context';
 function ThisProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [counter, setCounter] = useState([]);
+  const [seller, setSeller] = useState([]);
   const [qty, setQty] = useState(0);
 
   const contextValue = useMemo(
-    () => ({ products, setProducts, counter, setCounter, qty, setQty }),
-    [counter, products, qty],
+    () => ({
+      products,
+      setProducts,
+      counter,
+      setCounter,
+      qty,
+      setQty,
+      seller,
+      setSeller,
+    }),
+    [counter, products, qty, seller],
   );
 
   return <Context.Provider value={ contextValue }>{children}</Context.Provider>;

@@ -9,7 +9,6 @@ const login = async (email, password) => {
 
 const register = async (name, email, password, role) => {
   const newUser = await users.create(name, email, password, role);
-  console.log("newUser", newUser);
   return newUser;
 };
 
@@ -22,4 +21,8 @@ const getAll = async () => {
   return await users.findAll();
 };
 
-module.exports = { login, register, getUser, getAll };
+const getSellers = async () => {
+  return await users.findAll({ where: { role: 'seller' } });
+};
+
+module.exports = { login, register, getUser, getAll, getSellers };
