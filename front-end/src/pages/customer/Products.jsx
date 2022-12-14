@@ -8,7 +8,7 @@ import Navbar from '../../components/navbar';
 function Products() {
   const { products, setProducts, counter, setCounter, qty, setQty } = useContext(Context);
   const [input, setInput] = useState('');
-  console.log('input', input);
+  console.log('input', Number(input));
   const history = useHistory();
 
   const getStorage = () => {
@@ -21,8 +21,8 @@ function Products() {
     setProducts(data);
   };
 
-  const handleChange = ({ target: { name, value } }) => {
-    setInput((oldState) => ({ ...oldState, [name]: value }));
+  const handleChange = ({ target: { value } }) => {
+    setInput(value);
     getStorage();
   };
 
@@ -32,13 +32,15 @@ function Products() {
 
   useEffect(() => {
     console.log('counter', counter);
-    const total = input ? counter.reduce(
-      (acc, { value }) => acc + Number(input) * Number(value.price),
-      0,
-    ) : counter.reduce(
-      (acc, { quantity, value }) => acc + quantity * Number(value.price),
-      0,
-    );
+    const total = input
+      ? counter.reduce(
+        (acc, { value }) => acc + Number(input) * Number(value.price),
+        0,
+      )
+      : counter.reduce(
+        (acc, { quantity, value }) => acc + quantity * Number(value.price),
+        0,
+      );
     setQty(total);
     getStorage();
     const saveStorage = localStorage.getItem('carrinho');
@@ -135,15 +137,18 @@ function Products() {
               )} */}
               {counter.map(
                 ({ quantity, value }) => value.name === product.name && (
-                  <input
-                    key={ product.name }
-                    type="number"
-                    data-testid={ `customer_products__input-card-quantity-${product.id}` }
-                    value={ quantity }
-                    onChange={ handleChange }
-                    name="input"
-                    // {/* {quantity} */ }
-                  />
+                  <label htmlFor="input">
+                    <input
+                      key={ product.name }
+                      type="number"
+                      data-testid={ `
+                      customer_products__input-card-quantity-${product.id}` }
+                      value={ input || quantity }
+                      onChange={ handleChange }
+                      name="input"
+                      // {/* {quantity} */ }
+                    />
+                  </label>
                 ),
               )}
               <button
