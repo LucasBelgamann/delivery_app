@@ -7,7 +7,7 @@ import { formatCurrency } from '../../utils/formatCurrency';
 import { postData } from '../../utils/requests';
 
 function Checkout() {
-  const { counter, setCounter, qty, seller, setSeller } = useContext(Context);
+  const { counter, setCounter, qty, seller, setSeller, setQty } = useContext(Context);
   const history = useHistory();
   const tableHead = [
     'Item',
@@ -48,9 +48,13 @@ function Checkout() {
   }, []);
 
   const remove = (id) => {
-    const aiii = counter.filter(({ value }) => value.id !== id);
-    console.log(aiii);
-    setCounter(aiii);
+    const rmv = counter.filter(({ value }) => value.id !== id);
+    const total = rmv.reduce(
+      (acc, { quantity, value }) => acc + quantity * Number(value.price),
+      0,
+    );
+    setQty(total);
+    setCounter(rmv);
   };
 
   return (
@@ -69,11 +73,41 @@ function Checkout() {
           <tbody>
             {counter.map(({ quantity, value }, index) => (
               <tr key={ index }>
-                <td>{index + 1}</td>
-                <td>{value.name}</td>
-                <td>{quantity}</td>
-                <td>{value.price}</td>
-                <td>{formatCurrency(quantity * Number(value.price))}</td>
+                <td
+                  data-testid={ `customer_order_details_
+              _element-order-table-item-number-${index}` }
+                >
+                  {index + 1}
+
+                </td>
+                <td
+                  data-testid={ `customer_order_details_
+              _element-order-table-name-${index}` }
+                >
+                  {value.name}
+
+                </td>
+                <td
+                  data-testid={ `customer_order_details_
+              _element-order-table-quantity-${index}` }
+                >
+                  {quantity}
+
+                </td>
+                <td
+                  data-testid={ `customer_order_details_
+              _element-order-table-unit-price-${index}` }
+                >
+                  {value.price}
+
+                </td>
+                <td
+                  data-testid={ `customer_order_details_
+              _element-order-table-sub-total-${index}` }
+                >
+                  {formatCurrency(quantity * Number(value.price))}
+
+                </td>
                 <td>
                   <button
                     type="button"
@@ -87,7 +121,10 @@ function Checkout() {
             ))}
           </tbody>
         </table>
-        <p>{formatCurrency(qty)}</p>
+        <p data-testid="customer_order_details__element-order-total-price">
+          {formatCurrency(qty)}
+
+        </p>
       </div>
       <div>
         <h2>Detalhes e endereço da entrega</h2>
