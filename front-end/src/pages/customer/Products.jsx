@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import apiLogin from '../../utils/api';
 import { formatCurrency } from '../../utils/formatCurrency';
@@ -7,11 +7,23 @@ import Navbar from '../../components/navbar';
 
 function Products() {
   const { products, setProducts, counter, setCounter, qty, setQty } = useContext(Context);
+  const [input, setInput] = useState('');
+  console.log('input', input);
   const history = useHistory();
+
+  const getStorage = () => {
+    const save = counter.map(({ quantity, value }) => ({ quantity, value }));
+    localStorage.setItem('carrinho', JSON.stringify(save));
+  };
 
   const get = async () => {
     const { data } = await apiLogin.get('/customer/products');
     setProducts(data);
+  };
+
+  const handleChange = ({ target: { name, value } }) => {
+    setInput((oldState) => ({ ...oldState, [name]: value }));
+    getStorage();
   };
 
   useEffect(() => {
@@ -19,12 +31,18 @@ function Products() {
   }, []);
 
   useEffect(() => {
-    console.log('eiiiii', counter);
-    const total = counter.reduce(
+    console.log('counter', counter);
+    const total = input ? counter.reduce(
+      (acc, { value }) => acc + Number(input) * Number(value.price),
+      0,
+    ) : counter.reduce(
       (acc, { quantity, value }) => acc + quantity * Number(value.price),
       0,
     );
     setQty(total);
+    getStorage();
+    const saveStorage = localStorage.getItem('carrinho');
+    JSON.parse(saveStorage || '[]');
   }, [counter, qty]);
 
   const handleAddToCart = (value) => {
@@ -47,7 +65,6 @@ function Products() {
         ...item,
         quantity: item.quantity + 1,
       };
-
       return newCartItems;
     });
   };
@@ -61,7 +78,7 @@ function Products() {
         const item = prevState[itemIndex];
         const newCartItems = [...prevState];
 
-        if (item.quantity === 1) {
+        if (item.quantity === 0) {
           newCartItems.splice(itemIndex, 1);
 
           return newCartItems;
@@ -72,6 +89,7 @@ function Products() {
           quantity: item.quantity - 1,
         };
 
+        console.log('newCartItems', newCartItems);
         return newCartItems;
       });
     }
@@ -96,7 +114,7 @@ function Products() {
               height="150px"
             />
             <h4
-              data-testid={ ` customer_products__element-card-title-${product.id}` }
+              data-testid={ `customer_products__element-card-title-${product.id}` }
             >
               {product.name}
             </h4>
@@ -104,15 +122,35 @@ function Products() {
               <button
                 type="button"
                 onClick={ () => handleDecrementCartItem(product) }
+                data-testid={ `customer_products__button-card-rm-item-${product.id}` }
               >
                 -
               </button>
+              {/* {counter.length === 0 && (
+                <input
+                  data-testid={ `customer_products__input-card-quantity-${product.id}` }
+                  type="text"
+                  placeholder="0"
+                />
+              )} */}
               {counter.map(
                 ({ quantity, value }) => value.name === product.name && (
-                  <p key={ product.name }>{quantity}</p>
+                  <input
+                    key={ product.name }
+                    type="number"
+                    data-testid={ `customer_products__input-card-quantity-${product.id}` }
+                    value={ quantity }
+                    onChange={ handleChange }
+                    name="input"
+                    // {/* {quantity} */ }
+                  />
                 ),
               )}
-              <button type="button" onClick={ () => handleAddToCart(product) }>
+              <button
+                type="button"
+                onClick={ () => handleAddToCart(product) }
+                data-testid={ `customer_products__button-card-add-item-${product.id}` }
+              >
                 +
               </button>
             </div>
@@ -122,11 +160,14 @@ function Products() {
       <button
         type="button"
         className="cart-total"
+        data-testid="customer_products__button-cart"
         onClick={ () => history.push('/customer/checkout') }
       >
         Ver carrinho:
         {' '}
-        {qty.toFixed(2)}
+        <p data-testid="customer_products__checkout-bottom-value">
+          {qty.toFixed(2)}
+        </p>
         {' '}
       </button>
     </div>
