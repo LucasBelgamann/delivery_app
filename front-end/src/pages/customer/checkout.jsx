@@ -7,7 +7,7 @@ import { formatCurrency } from '../../utils/formatCurrency';
 import { postData } from '../../utils/requests';
 
 function Checkout() {
-  const { counter, setCounter, qty, seller, setSeller, setQty } = useContext(Context);
+  const { setCartItems, qty, seller, setSeller, cartItems } = useContext(Context);
   const history = useHistory();
   const tableHead = [
     'Item',
@@ -23,7 +23,10 @@ function Checkout() {
     total_price: qty,
     delivery_number: '',
     delivery_address: '',
-    products: counter.map(({ value, quantity }) => ({ product_id: value.id, quantity })),
+    products: cartItems.map((e) => ({
+      product_id: e.id,
+      quantity: e.quantity,
+    })),
   });
 
   const handleChange = ({ target: { name, value } }) => {
@@ -43,18 +46,13 @@ function Checkout() {
   };
 
   useEffect(() => {
-    console.log(get());
-    console.log(seller.id);
+    get();
   }, []);
 
   const remove = (id) => {
-    const rmv = counter.filter(({ value }) => value.id !== id);
-    const total = rmv.reduce(
-      (acc, { quantity, value }) => acc + quantity * Number(value.price),
-      0,
-    );
-    setQty(total);
-    setCounter(rmv);
+    const itemRemove = cartItems.filter((e) => e.id !== id);
+    console.log(itemRemove);
+    setCartItems(itemRemove);
   };
 
   return (
@@ -71,48 +69,18 @@ function Checkout() {
             </tr>
           </thead>
           <tbody>
-            {counter.map(({ quantity, value }, index) => (
+            {cartItems.map((e, index) => (
               <tr key={ index }>
-                <td
-                  data-testid={ `customer_order_details_
-              _element-order-table-item-number-${index}` }
-                >
-                  {index + 1}
-
-                </td>
-                <td
-                  data-testid={ `customer_order_details_
-              _element-order-table-name-${index}` }
-                >
-                  {value.name}
-
-                </td>
-                <td
-                  data-testid={ `customer_order_details_
-              _element-order-table-quantity-${index}` }
-                >
-                  {quantity}
-
-                </td>
-                <td
-                  data-testid={ `customer_order_details_
-              _element-order-table-unit-price-${index}` }
-                >
-                  {value.price}
-
-                </td>
-                <td
-                  data-testid={ `customer_order_details_
-              _element-order-table-sub-total-${index}` }
-                >
-                  {formatCurrency(quantity * Number(value.price))}
-
-                </td>
+                <td>{index + 1}</td>
+                <td>{e.name}</td>
+                <td>{e.quantity}</td>
+                <td>{e.price}</td>
+                <td>{formatCurrency(e.quantity * Number(e.price))}</td>
                 <td>
                   <button
                     type="button"
-                    key={ value.name }
-                    onClick={ () => remove(value.id) }
+                    key={ e.name }
+                    onClick={ () => remove(e.id) }
                   >
                     Remover
                   </button>
@@ -121,10 +89,7 @@ function Checkout() {
             ))}
           </tbody>
         </table>
-        <p data-testid="customer_order_details__element-order-total-price">
-          {formatCurrency(qty)}
-
-        </p>
+        <p>{formatCurrency(qty)}</p>
       </div>
       <div>
         <h2>Detalhes e endereço da entrega</h2>
@@ -151,7 +116,9 @@ function Checkout() {
             onChange={ handleChange }
           />
         </label>
-        <button type="button" onClick={ submit }>Finalizar pedido</button>
+        <button type="button" onClick={ submit }>
+          Finalizar pedido
+        </button>
       </div>
     </div>
   );

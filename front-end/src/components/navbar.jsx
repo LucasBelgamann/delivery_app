@@ -21,7 +21,7 @@ function Header() {
   };
 
   return (
-    <header className="common-header">
+    <div className="common-header">
       <h1
         data-testid="customer_products__element-navbar-link-products"
       >
@@ -46,7 +46,7 @@ function Header() {
           )
           : null
       }
-    </header>
+    </div>
   );
 }
 
