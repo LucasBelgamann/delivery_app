@@ -7,7 +7,8 @@ import { formatCurrency } from '../../utils/formatCurrency';
 import { postData } from '../../utils/requests';
 
 function Checkout() {
-  const { setCartItems, qty, seller, setSeller, cartItems } = useContext(Context);
+  const { setCartItems, qty, setQty, seller, setSeller, cartItems } = useContext(Context);
+
   const history = useHistory();
   const tableHead = [
     'Item',
@@ -49,6 +50,13 @@ function Checkout() {
     get();
   }, []);
 
+  useEffect(() => {
+    console.log('cartItems', cartItems);
+    setQty(formatCurrency(
+      cartItems.reduce((acc, i) => i.price * i.quantity + acc, 0).toFixed(2),
+    ));
+  }, [cartItems, qty, setQty]);
+
   const remove = (id) => {
     const itemRemove = cartItems.filter((e) => e.id !== id);
     console.log(itemRemove);
@@ -89,7 +97,10 @@ function Checkout() {
             ))}
           </tbody>
         </table>
-        <p>{formatCurrency(qty)}</p>
+        <p>
+          {qty}
+
+        </p>
       </div>
       <div>
         <h2>Detalhes e endereço da entrega</h2>
