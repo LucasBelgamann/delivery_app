@@ -5,7 +5,7 @@ import Navbar from '../../components/navbar';
 import CardP from '../../components/CardP';
 import Context from '../../context/context';
 
-function CustomerProducts() {
+function Products() {
   const { products, setProducts, cartItems, setCartItems } = useContext(Context);
   const history = useHistory();
 
@@ -97,4 +97,4 @@ function CustomerProducts() {
   );
 }
 
-export default CustomerProducts;
+export default Products;

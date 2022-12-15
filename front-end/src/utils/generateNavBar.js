@@ -1,10 +1,9 @@
 export const checkLS = (setLogin, setUserName, setRole) => {
-  const token = localStorage.getItem('token');
-  const name = localStorage.getItem('name');
-  const roleUser = localStorage.getItem('role');
+  const user = JSON.parse(localStorage.getItem('user'));
+  const { name, role, token } = user;
   setLogin(!!token);
   setUserName(name);
-  setRole(roleUser);
+  setRole(role);
 };
 
 export const roleUserPerson = (role) => {
