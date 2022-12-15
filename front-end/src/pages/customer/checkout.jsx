@@ -7,7 +7,7 @@ import { formatCurrency } from '../../utils/formatCurrency';
 import { postData } from '../../utils/requests';
 
 function Checkout() {
-  const { counter, setCounter, qty, seller, setSeller } = useContext(Context);
+  const { setCartItems, qty, seller, setSeller, cartItems } = useContext(Context);
   const history = useHistory();
   const tableHead = [
     'Item',
@@ -23,7 +23,10 @@ function Checkout() {
     total_price: qty,
     delivery_number: '',
     delivery_address: '',
-    products: counter.map(({ value, quantity }) => ({ product_id: value.id, quantity })),
+    products: cartItems.map((e) => ({
+      product_id: e.id,
+      quantity: e.quantity,
+    })),
   });
 
   const handleChange = ({ target: { name, value } }) => {
@@ -43,14 +46,13 @@ function Checkout() {
   };
 
   useEffect(() => {
-    console.log(get());
-    console.log(seller.id);
+    get();
   }, []);
 
   const remove = (id) => {
-    const aiii = counter.filter(({ value }) => value.id !== id);
-    console.log(aiii);
-    setCounter(aiii);
+    const itemRemove = cartItems.filter((e) => e.id !== id);
+    console.log(itemRemove);
+    setCartItems(itemRemove);
   };
 
   return (
@@ -67,18 +69,18 @@ function Checkout() {
             </tr>
           </thead>
           <tbody>
-            {counter.map(({ quantity, value }, index) => (
+            {cartItems.map((e, index) => (
               <tr key={ index }>
                 <td>{index + 1}</td>
-                <td>{value.name}</td>
-                <td>{quantity}</td>
-                <td>{value.price}</td>
-                <td>{formatCurrency(quantity * Number(value.price))}</td>
+                <td>{e.name}</td>
+                <td>{e.quantity}</td>
+                <td>{e.price}</td>
+                <td>{formatCurrency(e.quantity * Number(e.price))}</td>
                 <td>
                   <button
                     type="button"
-                    key={ value.name }
-                    onClick={ () => remove(value.id) }
+                    key={ e.name }
+                    onClick={ () => remove(e.id) }
                   >
                     Remover
                   </button>
@@ -114,7 +116,9 @@ function Checkout() {
             onChange={ handleChange }
           />
         </label>
-        <button type="button" onClick={ submit }>Finalizar pedido</button>
+        <button type="button" onClick={ submit }>
+          Finalizar pedido
+        </button>
       </div>
     </div>
   );

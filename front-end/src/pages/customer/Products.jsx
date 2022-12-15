@@ -1,123 +1,86 @@
-import { useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import apiLogin from '../../utils/api';
-import { formatCurrency } from '../../utils/formatCurrency';
-import Context from '../../context/context';
 import Navbar from '../../components/navbar';
+import CardP from '../../components/CardP';
+import Context from '../../context/context';
 
-function Products() {
-  const { products, setProducts, counter, setCounter, qty, setQty } = useContext(Context);
+function CustomerProducts() {
+  const { products, setProducts, cartItems, setCartItems } = useContext(Context);
   const history = useHistory();
 
-  const get = async () => {
-    const { data } = await apiLogin.get('/customer/products');
-    setProducts(data);
+  const setLocalStorage = (value) => {
+    localStorage.setItem('carrinho', JSON.stringify(value));
+    setCartItems(value);
   };
 
+  // const getLocalStorage = () => {
+  //   const local = localStorage.getItem('cart');
+  //   setReslocal(JSON.parse(local));
+  // };
+
   useEffect(() => {
-    get();
+    const getResponse = async () => {
+      const { data } = await apiLogin.get('/customer/products');
+      setProducts(data);
+    };
+    getResponse();
   }, []);
 
-  useEffect(() => {
-    console.log('eiiiii', counter);
-    const total = counter.reduce(
-      (acc, { quantity, value }) => acc + quantity * Number(value.price),
-      0,
-    );
-    setQty(total);
-  }, [counter, qty]);
-
-  const handleAddToCart = (value) => {
-    setCounter((prevState) => {
-      const itemIndex = prevState.findIndex(
-        (counterr) => counterr.value.id === value.id,
-      );
-
-      if (itemIndex < 0) {
-        return prevState.concat({
-          quantity: 1,
-          value,
-        });
-      }
-
-      const newCartItems = [...prevState];
-      const item = newCartItems[itemIndex];
-
-      newCartItems[itemIndex] = {
-        ...item,
-        quantity: item.quantity + 1,
-      };
-
-      return newCartItems;
-    });
-  };
-
-  const handleDecrementCartItem = (value) => {
-    if (counter.length) {
-      setCounter((prevState) => {
-        const itemIndex = prevState.findIndex(
-          (counterr) => counterr.value.id === value.id,
-        );
-        const item = prevState[itemIndex];
-        const newCartItems = [...prevState];
-
-        if (item.quantity === 1) {
-          newCartItems.splice(itemIndex, 1);
-
-          return newCartItems;
-        }
-
-        newCartItems[itemIndex] = {
-          ...item,
-          quantity: item.quantity - 1,
-        };
-
-        return newCartItems;
-      });
+  const addQuantity = ({ id, name, price, urlImage, quantity }) => {
+    const indexItem = cartItems.findIndex((item) => item.id === id);
+    if (indexItem >= 0) {
+      cartItems[indexItem].quantity += 1;
+      setLocalStorage([...cartItems]);
+    } else {
+      setLocalStorage([...cartItems, { id, name, price, urlImage, quantity }]);
     }
   };
 
+  const removeQuantity = (id) => {
+    const indexItem = cartItems.findIndex((item) => item.id === id);
+    if (indexItem >= 0 && cartItems[indexItem].quantity > 1) {
+      cartItems[indexItem].quantity -= 1;
+      setLocalStorage([...cartItems]);
+    }
+    if (indexItem >= 0) {
+      cartItems.splice(indexItem, 1);
+      setLocalStorage([...cartItems]);
+    }
+  };
+
+  const setItem = ({ id, name, price, urlImage, quantity }) => {
+    const indexItem = cartItems.findIndex((item) => item.id === id);
+    if (indexItem >= 0 && quantity > 0) {
+      cartItems[indexItem].quantity = quantity;
+      setLocalStorage([...cartItems]);
+    }
+    if (indexItem >= 0 && quantity <= 0) {
+      cartItems.splice(indexItem, 1);
+      setLocalStorage([...cartItems]);
+    }
+    return setLocalStorage([...cartItems, { id, name, price, urlImage, quantity }]);
+  };
+
   return (
-    <div>
+    <>
       <Navbar />
       <div className="products-container">
-        {products.map((product) => (
-          <div key={ product.id } className="product">
-            <h6
-              data-testid={ `customer_products__element-card-price-${product.id}` }
-            >
-              {formatCurrency(product.price)}
-            </h6>
-            <img
-              data-testid={ `customer_products__img-card-bg-image-${product.id}` }
-              src={ product.url_image }
-              alt={ product.name }
-              width="150px"
-              height="150px"
+        {
+          products.map((product) => (
+            <CardP
+              key={ product.id }
+              id={ product.id }
+              price={ product.price }
+              img={ product.url_image }
+              name={ product.name }
+              addQuantity={ addQuantity }
+              removeQuantity={ removeQuantity }
+              setItem={ setItem }
+              qty={ cartItems.find((item) => item.id === product.id)?.quantity }
             />
-            <h4
-              data-testid={ ` customer_products__element-card-title-${product.id}` }
-            >
-              {product.name}
-            </h4>
-            <div className="btn-moreLess">
-              <button
-                type="button"
-                onClick={ () => handleDecrementCartItem(product) }
-              >
-                -
-              </button>
-              {counter.map(
-                ({ quantity, value }) => value.name === product.name && (
-                  <p key={ product.name }>{quantity}</p>
-                ),
-              )}
-              <button type="button" onClick={ () => handleAddToCart(product) }>
-                +
-              </button>
-            </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
       <button
         type="button"
@@ -126,11 +89,12 @@ function Products() {
       >
         Ver carrinho:
         {' '}
-        {qty.toFixed(2)}
+        { cartItems.reduce((acc, i) => i.price * i.quantity + acc, 0).toFixed(2) }
+        {' '}
         {' '}
       </button>
-    </div>
+    </>
   );
 }
 
-export default Products;
+export default CustomerProducts;
