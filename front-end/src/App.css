@@ -4,53 +4,47 @@ body {
   text-decoration: none;
 }
 
-.common-header {
-  align-items: center;
-  background-color: black;
-  color: white;
-  display: flex;
-  height: 8vh;
-  justify-content: center;
-  margin-bottom: 30px;
-  min-width: 100vw;
-}
-
-.common-header p {
-  margin: 0 35rem;
-}
-
-.products-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
-}
-
-.products-container div {
-  background-color: white;
-  border-radius: 40px;
-  box-shadow: 22px 22px 43px #acacac , -22px -22px 43px white;
-  color: black;
-  height: 50vh;
-  margin: 20px;
-  width: 18vw;
-}
 
 .product {
   align-items: center;
+  background: white;
+  border-radius: 40px;
+  box-shadow: 8px 8px 12px #5a5a5a , -8px -8px 12px white;
   display: flex;
   flex-direction: column;
-}
-
-.btn-products input {
   font-size: 15px;
-  height: 30px;
-  margin: 0 10px;
-  text-align: center;
-  width: 30px;
+  height: 38vh;
+  margin: 20px;
+  transition: box-shadow;
+  transition-duration: 1s;
+  width: 14vw;
 }
 
-.btn-products button {
+.product:hover {
+  box-shadow: 26px 26px 52px #969595 , -26px -26px 52px white;
+}
+
+.container-products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: auto;
+  width: 70%;
+}
+
+.product input {
+  font-size: 15px;
+  height: 25px;
+  margin: 0 7px;
+  text-align: center;
+  width: 25px;
+}
+
+.price-product {
+  color: gray;
+}
+
+.product button {
   background-color: blueviolet;
   border: none;
   border-radius: 50%;
@@ -74,14 +68,3 @@ body {
   position: fixed;
   right: 0;
 }
-
-.table {
-  border: 1px solid white;
-  text-align: center;
-  width: 70%;
-}
-
-.table th, td {
-  border: 1px solid white;
-}
-
