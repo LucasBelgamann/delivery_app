@@ -74,7 +74,8 @@ export default function FinishForm() {
           data-testid="customer_checkout__input-address-number"
           type="number"
           id="delivery_number"
-          placeholder="151"
+          min="0"
+          placeholder="Digite o seu número "
           name="delivery_number"
           onChange={ handleChange }
         />

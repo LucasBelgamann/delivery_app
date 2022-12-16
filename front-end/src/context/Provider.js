@@ -9,9 +9,9 @@ function ThisProvider({ children }) {
   const [sellers, setSellers] = useState([]);
   const [qty, setQty] = useState(0);
   const [storage, setStorage] = useLocalStorage('carrinho', []);
-  const [total, setTotal] = useState([]);
+  const [total, setTotal] = useState(0);
 
-  const addQuantity = ({ id, name, price, urlImage, quantity }) => {
+  const addQuantity = ({ id, name, price, url_image: urlImage, quantity }) => {
     const indexItem = storage.findIndex((item) => item.id === id);
     if (indexItem >= 0) {
       storage[indexItem].quantity += 1;
@@ -27,12 +27,12 @@ function ThisProvider({ children }) {
       storage[indexItem].quantity -= 1;
       return setStorage([...storage]);
     }
-    storage.splice(indexItem, 1);
-    return setStorage([...storage]);
+    if (indexItem >= 0) {
+      storage.splice(indexItem, 1);
+      return setStorage([...storage]);
+    }
   };
-
   const setQuantityWithInput = ({ id, name, price, url_image: urlImage, quantity }) => {
-    console.log('provider', { id, name, price, urlImage, quantity });
     const indexItem = storage.findIndex((item) => item.id === id);
     if (indexItem >= 0 && quantity > 0) {
       storage[indexItem].quantity = quantity;
@@ -63,7 +63,7 @@ function ThisProvider({ children }) {
       total,
       setTotal,
     }),
-    [cartItems, products, qty, sellers, setStorage, storage],
+    [cartItems, products, qty, sellers, setStorage, storage, total],
   );
 
   return <Context.Provider value={ contextValue }>{children}</Context.Provider>;
