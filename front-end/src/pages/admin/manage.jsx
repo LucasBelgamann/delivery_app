@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../../components/navbar';
 import SubmitBtnAdmin from '../../components/submitBtnAdmin';
 import { CSS } from '../login';
@@ -15,18 +15,21 @@ function Manage() {
 
   const handleChange = ({ target: { name, value } }) => {
     setLogin((oldState) => ({ ...oldState, [name]: value }));
-    const PASSMIN = 5;
+  };
+
+  useEffect(() => {
+    const PASSMIN = 6;
     const NAMEMIN = 12;
     const regex = /\w+@[a-z]+.com/g;
-    if (loginInput.email.match(regex)
+    if (regex.test(loginInput.email)
       && loginInput.password.length >= PASSMIN
-      && loginInput.name.length >= NAMEMIN
+      && loginInput.name.length > NAMEMIN
       && loginInput.role !== '') {
       setDisabledBtn(false);
     } else {
       return setDisabledBtn(true);
     }
-  };
+  }, [loginInput]);
 
   const roles = [{
     name: 'Escolha uma Opção',
@@ -86,14 +89,15 @@ function Manage() {
               style={ CSS.Input }
             />
           </label>
-          <label htmlFor="tipo" style={ CSS.Label }>
+          <label htmlFor="role" style={ CSS.Label }>
             Tipo:
             <select
-              id="tipo"
+              id="role"
               style={ CSS.Input }
               name="role"
               onChange={ handleChange }
               data-testid="admin_manage__select-role"
+              value={ loginInput.role }
             >
               {roles.map((role) => (
                 <option
