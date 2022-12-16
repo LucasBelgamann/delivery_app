@@ -25,8 +25,10 @@ export default function Products() {
 
   useEffect(() => {
     const somaTotal = storage.reduce((acc, c) => c.price * c.quantity + acc, 0);
+    console.log('somaTotal', somaTotal);
     setTotal(somaTotal.toFixed(2).replace('.', ','));
-  }, [storage]);
+    console.log('total', total);
+  }, [setTotal, storage]);
 
   return (
     <div>
@@ -39,7 +41,7 @@ export default function Products() {
           type="button"
           data-testid="customer_products__button-cart"
           onClick={ () => history.push('/customer/checkout') }
-          disabled={ total === 0 }
+          disabled={ storage.length === 0 }
           className="cart-total"
         >
           Ver Carrinho:

@@ -11,14 +11,25 @@ export default function ProductCard() {
   } = useContext(Context);
 
   const handleInputChange = (product, value) => {
-    console.log('handlechange', product, Number(value));
     setQuantityWithInput({ ...product, quantity: Number(value),
     });
+    window.location.reload();
+  };
+
+  const productU = (pr) => {
+    if (pr?.quantity === 0 || !pr?.quantity) {
+      return 0;
+    }
+    if (pr?.quantity > 0) {
+      return pr?.quantity;
+    }
+    return null;
   };
 
   return (
     <>
       {products.map((product) => (
+
         <div key={ product.id } className="product">
           <h2 className="price-product">
             R$
@@ -55,9 +66,8 @@ export default function ProductCard() {
               data-testid={ `customer_products__input-card-quantity-${product.id}` }
               type="text"
               inputMode="numeric"
-              min={ 0 }
               placeholder="0"
-              value={ storage.find(({ name }) => name === product.name)?.quantity }
+              value={ productU(storage.find(({ name }) => name === product.name)) }
               onChange={ ({ target: { value } }) => handleInputChange(product, value) }
             />
             <button
