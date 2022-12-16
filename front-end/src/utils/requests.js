@@ -19,4 +19,9 @@ export const postData = async (endpoint, body) => {
   return data;
 };
 
+export const patchData = async (endpoint, body) => {
+  const { data } = await api.patch(endpoint, body);
+  return data;
+};
+
 export default api;

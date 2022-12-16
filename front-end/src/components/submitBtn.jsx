@@ -15,7 +15,7 @@ function SubmitBtn({
     postData(routeSuffix, sendObject)
       .then((data) => {
         if (routeSuffix === 'register') {
-          // localStorage.setItem('token', data.token);
+          localStorage.setItem('token', data.token);
           // localStorage.setItem('role', data.dataValues.role);
           localStorage.setItem('user', JSON.stringify({
             name: data.dataValues.name,
@@ -24,7 +24,7 @@ function SubmitBtn({
             email: data.dataValues.email }));
           if (setter) setter(false);
         } else {
-          // localStorage.setItem('token', data.token);
+          localStorage.setItem('token', data.token);
           // localStorage.setItem('role', data.role);
           localStorage.setItem('user', JSON.stringify({
             name: data.name, role: data.role, token: data.token, email: data.email }));

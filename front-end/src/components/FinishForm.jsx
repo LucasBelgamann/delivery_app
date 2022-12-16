@@ -9,7 +9,7 @@ export default function FinishForm() {
   const history = useHistory();
   const [postAddress, setAddress] = useState({
     seller_id: 1,
-    total_price: total,
+    total_price: total.replace(',', '.'),
     delivery_number: '',
     delivery_address: '',
     products: storage.map((e) => ({
@@ -22,10 +22,9 @@ export default function FinishForm() {
     setAddress((oldState) => ({ ...oldState, [name]: value }));
   };
 
-  const handlesubmit = () => {
-    postData('sales', postAddress);
-    alert('Compra realizada com sucesso');
-    history.push('/customer/orders/:id');
+  const handlesubmit = async () => {
+    const { sales } = await postData('sales', postAddress);
+    history.push(`/customer/orders/${sales}`);
   };
 
   useEffect(() => {
@@ -63,7 +62,7 @@ export default function FinishForm() {
           data-testid="customer_checkout__input-address"
           type="text"
           id="address"
-          name="deliver_address"
+          name="delivery_address"
           placeholder="Digite o seu endereço"
           onChange={ handleChange }
         />
@@ -82,7 +81,7 @@ export default function FinishForm() {
       </label>
       <button
         data-testid="customer_checkout__button-submit-order"
-        type="submit"
+        type="button"
         onClick={ handlesubmit }
       >
         FINALIZAR PEDIDO

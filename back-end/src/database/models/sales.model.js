@@ -9,7 +9,7 @@ module.exports = (sequelize,DataTypes) => {
     seller_id: {
       type: DataTypes.INTEGER, foreignKey: true
     },
-    total_price: DataTypes.DECIMAL(9,2),
+    total_price: DataTypes.DECIMAL(10,2),
     delivery_address: DataTypes.STRING(100),
     delivery_number:DataTypes.STRING(50),
     sale_date: {type: DataTypes.DATE, defaultValue: DataTypes.NOW},

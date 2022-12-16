@@ -6,9 +6,10 @@ import Context from './context';
 function ThisProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
-  const [sellers, setSellers] = useState([]);
+  const [sellers, setSellers] = useLocalStorage('seller', []);
   const [qty, setQty] = useState(0);
   const [storage, setStorage] = useLocalStorage('carrinho', []);
+  const [orders, setOrders] = useLocalStorage('orders', []);
   const [total, setTotal] = useState(0);
 
   const addQuantity = ({ id, name, price, url_image: urlImage, quantity }) => {
@@ -62,8 +63,10 @@ function ThisProvider({ children }) {
       setQuantityWithInput,
       total,
       setTotal,
+      orders,
+      setOrders,
     }),
-    [cartItems, products, qty, sellers, setStorage, storage, total],
+    [cartItems, products, qty, sellers, setStorage, storage, total, orders, setOrders],
   );
 
   return <Context.Provider value={ contextValue }>{children}</Context.Provider>;

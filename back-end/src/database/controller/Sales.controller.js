@@ -26,7 +26,8 @@ const updateStatus = async (req, res) => {
 const getSalesById = async (req, res) => {
   const { id } = req.params;
   const result = await service.getSalesById(id);
-  return res.status(200).json(result);
+  console.log(result)
+  return res.status(200).json([result]);
 };
 
 module.exports = {
