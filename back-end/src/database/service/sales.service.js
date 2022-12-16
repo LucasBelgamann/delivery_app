@@ -48,7 +48,7 @@ const getSalesById = async (id) => {
       {
         model: products,
         as: "products",
-        through: { attributes: [] },
+        through: { attributes: ['quantity'] },
         include: [{ model: salesProducts, as: "salesProducts" }],
       },
     ],
