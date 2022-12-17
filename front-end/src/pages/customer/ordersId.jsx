@@ -9,7 +9,6 @@ function OrdersId() {
   const { orders, setOrders, sellers } = useContext(Context);
   const { id } = useParams();
   const test1 = 'customer_order_details__';
-  const dez = 10;
   const tableHead = [
     'Item',
     'Descrição',
@@ -48,11 +47,12 @@ function OrdersId() {
       ))}
       {orders.map((e, i) => (
         <div key={ i }>
-          <h4 data-testid={ `${test1}element-order-details-label-order-${i}` }>
+          <h4 data-testid={ `${test1}element-order-details-label-order-id` }>
             {e.id}
           </h4>
           <h4 data-testid={ `${test1}element-order-details-label-order-date` }>
-            {moment(e.sale_date).subtract(dez, 'days').calendar()}
+            {/* {moment().subtract(dez, 'days').calendar()} */}
+            {moment().format('DD/MM/YYYY')}
           </h4>
           <h4
             data-testid={ `${test1}element-order-details-label-delivery-status` }
@@ -63,6 +63,7 @@ function OrdersId() {
             type="button"
             onClick={ handleEntregue }
             data-testid="customer_order_details__button-delivery-check"
+            disabled
           >
             Marcar como entregue
           </button>
@@ -120,7 +121,7 @@ function OrdersId() {
               (acc, e) => Number(e.salesProducts.quantity) * Number(e.price) + acc,
               0,
             )
-            .toFixed(2))}
+            .toFixed(2).replace(/\./, ','))}
         </span>
       </p>
     </>
