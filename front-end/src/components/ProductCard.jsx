@@ -49,6 +49,7 @@ export default function ProductCard() {
           />
           <h3
             data-testid={ `customer_products__element-card-title-${product.id}` }
+            style={ { color: 'black' } }
           >
             {product.name}
 

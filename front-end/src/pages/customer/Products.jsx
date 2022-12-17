@@ -2,9 +2,9 @@ import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import apiLogin from '../../utils/api';
 import NavBar from '../../components/navbar';
-// import ProductCard from '../../components/ProductCard';
+import ProductCard from '../../components/ProductCard';
 import Context from '../../context/context';
-import NewCard from '../../components/NewCard';
+// import NewCard from '../../components/NewCard';
 
 export default function Products() {
   const {
@@ -26,17 +26,15 @@ export default function Products() {
 
   useEffect(() => {
     const somaTotal = storage.reduce((acc, c) => c.price * c.quantity + acc, 0);
-    console.log('somaTotal', somaTotal);
     setTotal(somaTotal.toFixed(2).replace('.', ','));
-    console.log('total', total);
   }, [setTotal, storage]);
 
   return (
     <div>
       <NavBar />
       <div className="container-products">
-        <NewCard />
-        {/* <ProductCard /> */}
+        {/* <NewCard /> */}
+        <ProductCard />
       </div>
       <div>
         <button
