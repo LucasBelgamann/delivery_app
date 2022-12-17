@@ -6,9 +6,22 @@ import { postData } from '../utils/requests';
 
 export default function FinishForm() {
   const { storage, setSellers, sellers, total } = useContext(Context);
+  const [ID, setId] = useState(2);
+  // console.log('idssss', sellers.map(({ id }) => id)[0]);
+
+  useEffect(() => {
+    const getId = async () => {
+      const ids = await sellers.map(({ id }) => id)[0];
+      console.log('ids', ID);
+      setId(ids);
+    };
+    getId();
+    console.log('ids', ID);
+  }, []);
+
   const history = useHistory();
   const [postAddress, setAddress] = useState({
-    seller_id: 1,
+    seller_id: ID,
     total_price: total.replace(',', '.'),
     delivery_number: '',
     delivery_address: '',
@@ -24,13 +37,15 @@ export default function FinishForm() {
 
   const handlesubmit = async () => {
     const { sales } = await postData('sales', postAddress);
-    history.push(`/customer/orders/${sales}`);
+    console.log('sales', sales.id);
+    history.push(`/customer/orders/${sales.id}`);
   };
 
   useEffect(() => {
     const getResponse = async () => {
       const { data } = await apiLogin.get('/login/seller');
       setSellers(data);
+      console.log('postAddress', postAddress);
     };
     getResponse();
   }, []);

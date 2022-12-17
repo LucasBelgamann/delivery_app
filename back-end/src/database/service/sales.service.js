@@ -28,7 +28,7 @@ const create = async ({
     sale_id: sale.id,
   });
 
-  return sale.id;
+  return { id: sale.id, sale: sale };
 };
 
 const getAll = async () => {
@@ -48,7 +48,7 @@ const getSalesById = async (id) => {
       {
         model: products,
         as: "products",
-        through: { attributes: ['quantity'] },
+        through: { attributes: ["quantity"] },
         include: [{ model: salesProducts, as: "salesProducts" }],
       },
     ],

@@ -9,7 +9,6 @@ function OrdersId() {
   const { orders, setOrders, sellers } = useContext(Context);
   const { id } = useParams();
   const test1 = 'customer_order_details__';
-  const dez = 10;
   const tableHead = [
     'Item',
     'Descrição',
@@ -27,7 +26,9 @@ function OrdersId() {
   useEffect(() => {
     const getResponse = async () => {
       const { data } = await apiLogin.get(`/sales/${id}`);
-      setOrders(data);
+      console.log('data', data.map((e) => e));
+      setOrders(data.map((e) => e));
+      console.log('orders', orders);
     };
     getResponse();
   }, []);
@@ -37,14 +38,33 @@ function OrdersId() {
       <Navbar />
       <h1>Detalhe do Pedido</h1>
       {sellers.map((e, i) => (
-        <p key={ i }>{e.name}</p>
+        <p
+          key={ i }
+          data-testid={ `${test1}element-order-details-label-seller-name` }
+        >
+          {e.name}
+        </p>
       ))}
       {orders.map((e, i) => (
         <div key={ i }>
-          <h4>{e.id}</h4>
-          <h4>{moment(e.sale_date).subtract(dez, 'days').calendar()}</h4>
-          <h4>{e.status}</h4>
-          <button type="button" onClick={ handleEntregue }>
+          <h4 data-testid={ `${test1}element-order-details-label-order-id` }>
+            {e.id}
+          </h4>
+          <h4 data-testid={ `${test1}element-order-details-label-order-date` }>
+            {/* {moment().subtract(dez, 'days').calendar()} */}
+            {moment().format('DD/MM/YYYY')}
+          </h4>
+          <h4
+            data-testid={ `${test1}element-order-details-label-delivery-status` }
+          >
+            {e.status}
+          </h4>
+          <button
+            type="button"
+            onClick={ handleEntregue }
+            data-testid="customer_order_details__button-delivery-check"
+            disabled
+          >
             Marcar como entregue
           </button>
         </div>
@@ -59,19 +79,13 @@ function OrdersId() {
         </thead>
         {orders.map((e) => e.products.map((product, i) => (
           <tr key={ i }>
-            <td
-              data-testid={ `${test1}element-order-table-item-number-${i}` }
-            >
+            <td data-testid={ `${test1}element-order-table-item-number-${i}` }>
               {i + 1}
             </td>
-            <td
-              data-testid={ `${test1}element-order-table-name-${i}` }
-            >
+            <td data-testid={ `${test1}element-order-table-name-${i}` }>
               {product.name}
             </td>
-            <td
-              data-testid={ `${test1}element-order-table-quantity-${i}` }
-            >
+            <td data-testid={ `${test1}element-order-table-quantity-${i}` }>
               {product.salesProducts.quantity}
             </td>
             <td>
@@ -107,7 +121,7 @@ function OrdersId() {
               (acc, e) => Number(e.salesProducts.quantity) * Number(e.price) + acc,
               0,
             )
-            .toFixed(2))}
+            .toFixed(2).replace(/\./, ','))}
         </span>
       </p>
     </>

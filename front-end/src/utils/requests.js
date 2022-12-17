@@ -2,11 +2,6 @@ import axios from 'axios';
 
 const api = axios.create({
   baseURL: 'http://localhost:3001',
-  headers: {
-    common: {
-      Authorization: localStorage.getItem('token'),
-    },
-  },
 });
 
 export const getData = async (endpoint) => {
@@ -15,6 +10,8 @@ export const getData = async (endpoint) => {
 };
 
 export const postData = async (endpoint, body) => {
+  const token = localStorage.getItem('token');
+  api.defaults.headers.common.Authorization = token;
   const { data } = await api.post(endpoint, body);
   return data;
 };
