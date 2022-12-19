@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import SubmitBtn from '../components/submitBtn';
 
@@ -21,6 +21,23 @@ function Login() {
       return setDisabledBtn(true);
     }
   };
+
+  useEffect(() => {
+    const login = localStorage.getItem('user');
+    const role = JSON.parse(login)?.role;
+    if (!login || login === null) return history.replace('/login');
+
+    if (login && role === 'customer') {
+      history.replace('/customer/products');
+    }
+    if (login && role === 'administrator') {
+      return history.push('/admin/manage');
+    }
+    if (login && role === 'seller') {
+      return history.push('/seller/orders');
+    }
+    return history.replace('/login');
+  }, [history]);
 
   return (
     <div>
@@ -53,7 +70,6 @@ function Login() {
             dataTestid="common_login__button-login"
             routeSuffix="login"
             sendObject={ loginInput }
-            navigation="/customer/products"
             btnName="LOGIN"
             disabledBtn={ disabledBtn }
           />

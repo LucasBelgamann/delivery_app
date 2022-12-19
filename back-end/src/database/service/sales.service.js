@@ -32,7 +32,11 @@ const create = async ({
 };
 
 const getAll = async () => {
-  return await sales.findAll();
+  return await sales.findAll({
+    include: [
+      { model: users, as: "user" },
+    ],
+  });
 };
 
 const updateStatus = async (status, id) => {
@@ -55,9 +59,16 @@ const getSalesById = async (id) => {
   });
 };
 
+
+const salesByUserId = async (name) => {
+  const Sales = await sales.findAll({ where: { name } });
+  return Sales;
+};
+
 module.exports = {
   create,
   getAll,
   updateStatus,
   getSalesById,
+  salesByUserId,
 };

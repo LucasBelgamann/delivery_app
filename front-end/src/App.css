@@ -1,5 +1,5 @@
 body {
-  background-color: #1f1c1c;
+  background-color: #0d0d0d;
   color: white;
 }
 
@@ -27,8 +27,8 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: auto;
-  width: 70%;
+  margin: 30px auto;
+  width: 80%;
 }
 
 .product input {
@@ -58,26 +58,27 @@ body {
   background-color: rgba(42, 50, 156, 0.78);
   border: none;
   border-radius: 10px;
-  bottom: 0;
+  bottom: 20px;
   color: white;
   cursor: pointer;
   font-size: 20px;
   min-height: 80px;
   min-width: 300px;
   position: fixed;
-  right: 0;
+  right: 20px;
 }
 
 
 .card {
   background-color: black;
   border-radius: 25px;
-  height: 350px;
+  height: 300px;
   margin: 10px;
   overflow: hidden;
   position: relative;
-  width: 285px;
+  width: 235px;
 }
+
 
 .card:before {
   background-color: rgba(28, 33, 106, 0.78);
@@ -99,7 +100,7 @@ body {
   bottom: 0;
   color: #090808;
   content: 'JOHN';
-  font-size: 6.5rem;
+  font-size: 5.5rem;
   font-weight: 600;
   left: 0;
   position: absolute;
@@ -113,6 +114,15 @@ body {
   position: relative;
   width: 100%;
   z-index: 1;
+}
+
+
+.common-header button {
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  height: 4vh;
+  width: 3vw;
 }
 
 .card .imgBx img {
@@ -136,7 +146,7 @@ body {
 
 .card .contentBx h3 {
   color: white;
-  font-size: 18px;
+  font-size: 13px;
   font-weight: 500;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -170,6 +180,7 @@ body {
   width: 28px;
 }
 
+
 .card .contentBx .buy button {
   background-color: rgba(39, 45, 172, 0.78);
   border: none;
@@ -185,3 +196,21 @@ body {
   opacity: 1;
   top: 0;
 }
+
+.common-header {
+  align-items: center;
+  background-color: black;
+  display: flex;
+  justify-content: space-around;
+}
+
+.pedidos {
+  background-color: white;
+  border-radius: 10px;
+  color: black;
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+  width: 30%;
+}
+

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { checkLS, roleUserPerson } from '../utils/generateNavBar';
-import MeusPedidosBtn from './meusPedidosBtn';
 
 function Header() {
   const [logged, setLogin] = useState(false);
@@ -22,13 +21,26 @@ function Header() {
 
   return (
     <div className="common-header">
+      {role === 'customer' && (
+        <Link
+          to="/customer/products"
+        >
+          Products
+        </Link>)}
       <h1
         data-testid="customer_products__element-navbar-link-products"
       >
         { roleUserPerson(role) }
       </h1>
       { roleUserPerson(role) === null
-        ? <MeusPedidosBtn />
+        ? (
+          <Link
+            data-testid="customer_products__element-navbar-link-orders"
+            to="/customer/orders"
+          >
+            Meus Pedidos
+          </Link>
+        )
         : null}
       <p data-testid="customer_products__element-navbar-user-full-name">
         { userName }

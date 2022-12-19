@@ -26,8 +26,8 @@ function OrdersId() {
   useEffect(() => {
     const getResponse = async () => {
       const { data } = await apiLogin.get(`/sales/${id}`);
-      console.log('data', data.map((e) => e));
-      setOrders(data.map((e) => e));
+      const newData = data.map((e) => e);
+      setOrders(newData);
       console.log('orders', orders);
     };
     getResponse();
@@ -63,7 +63,7 @@ function OrdersId() {
             type="button"
             onClick={ handleEntregue }
             data-testid="customer_order_details__button-delivery-check"
-            disabled
+            disabled={ e.status !== 'Em Trânsito' }
           >
             Marcar como entregue
           </button>
