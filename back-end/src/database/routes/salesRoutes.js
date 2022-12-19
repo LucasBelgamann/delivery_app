@@ -9,5 +9,6 @@ router.post('/',authenticateToken,salesController.create);
 router.get('/',salesController.getAll);
 router.patch('/:id',salesController.updateStatus);
 router.get('/:id',salesController.getSalesById)
+router.get('/:name',salesController.salesByUserId)
 
 module.exports = router;

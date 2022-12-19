@@ -17,19 +17,18 @@ function Routes() {
         <Route exact path="/">
           <Redirect to="/login" />
         </Route>
-        <Route exact path="/login" component={ Login } />
-        <Route exact path="/register" component={ Register } />
+        <Route path="/login" component={ Login } />
+        <Route path="/register" component={ Register } />
         <Route exact path="/customer/products" component={ CustomProducts } />
         <Route exact path="/customer/checkout" component={ CustomCheckout } />
         <Route exact path="/customer/orders/:id" component={ CustomOrdersId } />
         <Route
-          exact
-          path="/customer/orders/:id/:idVenda"
+          path="/customer/orders"
           component={ CustomOrdersIdVenda }
         />
         <Route exact path="/seller/orders" component={ SellOrders } />
         <Route exact path="/seller/orders/:id" component={ SellOrdersId } />
-        <Route exact path="/admin/manage" component={ AdminManage } />
+        <Route path="/admin/manage" component={ AdminManage } />
       </Switch>
     </div>
   );

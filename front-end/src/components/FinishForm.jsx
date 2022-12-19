@@ -5,7 +5,13 @@ import apiLogin from '../utils/api';
 import { postData } from '../utils/requests';
 
 export default function FinishForm() {
-  const { storage, setSellers, sellers, total } = useContext(Context);
+  const {
+    setStorage,
+    storage,
+    setSellers,
+    sellers,
+    total,
+  } = useContext(Context);
   const [ID, setId] = useState(2);
   // console.log('idssss', sellers.map(({ id }) => id)[0]);
 
@@ -37,7 +43,8 @@ export default function FinishForm() {
 
   const handlesubmit = async () => {
     const { sales } = await postData('sales', postAddress);
-    console.log('sales', sales.id);
+    setStorage([]);
+    alert('Compra realizada com sucesso');
     history.push(`/customer/orders/${sales.id}`);
   };
 
@@ -60,15 +67,9 @@ export default function FinishForm() {
           id="sellers"
           onChange={ handleChange }
         >
-          {
-            sellers.map((seller) => (
-              <option
-                key={ seller.id }
-              >
-                {seller.name}
-              </option>
-            ))
-          }
+          {sellers.map((seller) => (
+            <option key={ seller.id }>{seller.name}</option>
+          ))}
         </select>
       </label>
       <label htmlFor="address">

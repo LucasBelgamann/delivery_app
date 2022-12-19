@@ -4,19 +4,36 @@ import PropTypes from 'prop-types';
 import { postData } from '../utils/requests';
 
 function SubmitBtn({
-  routeSuffix, sendObject, navigation, btnName,
+  routeSuffix, sendObject, btnName,
   setter = undefined, dataTestid, disabledBtn }) {
   const [errorRequisiton, setErrorRequisition] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
 
   const navigate = useHistory();
 
+  const vaipraonde = () => {
+    const login = localStorage.getItem('user');
+    const role = JSON.parse(login)?.role;
+    if (!login || login === null) return navigate.replace('/login');
+
+    if (login && role === 'customer') {
+      navigate.replace('/customer/products');
+    }
+    if (login && role === 'administrator') {
+      return navigate.replace('/admin/manage');
+    }
+    if (login && role === 'seller') {
+      return navigate.replace('/seller/orders');
+    }
+  };
+
   function handleSubmit() {
     postData(routeSuffix, sendObject)
       .then((data) => {
         if (routeSuffix === 'register') {
           localStorage.setItem('token', data.token);
-          // localStorage.setItem('role', data.dataValues.role);
+          localStorage.setItem('role', data.dataValues.role);
+          localStorage.setItem('name', data.dataValues.name);
           localStorage.setItem('user', JSON.stringify({
             name: data.dataValues.name,
             role: data.dataValues.role,
@@ -25,12 +42,13 @@ function SubmitBtn({
           if (setter) setter(false);
         } else {
           localStorage.setItem('token', data.token);
-          // localStorage.setItem('role', data.role);
+          localStorage.setItem('role', data.role);
+          localStorage.setItem('name', data.name);
           localStorage.setItem('user', JSON.stringify({
             name: data.name, role: data.role, token: data.token, email: data.email }));
           if (setter) setter(true);
         }
-        navigate.push(navigation);
+        vaipraonde();
       })
       .catch(({ response }) => {
         setErrorMessage(response.data.message);
