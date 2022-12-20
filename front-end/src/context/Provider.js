@@ -13,7 +13,6 @@ function ThisProvider({ children }) {
   const [total, setTotal] = useState(0);
   const [pedidos, setPedidos] = useLocalStorage('pedido', []);
   const [sellerSales, setSellerSales] = useLocalStorage('sellerSales', []);
-  const [user, setUser] = useLocalStorage('user', []);
 
   const addQuantity = ({ id, name, price, url_image: urlImage, quantity }) => {
     const indexItem = storage.findIndex((item) => item.id === id);
@@ -79,8 +78,6 @@ function ThisProvider({ children }) {
       setPedidos,
       sellerSales,
       setSellerSales,
-      user,
-      setUser,
     }),
     [
       cartItems,

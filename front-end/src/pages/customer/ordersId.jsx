@@ -51,8 +51,7 @@ function OrdersId() {
             {e.id}
           </h4>
           <h4 data-testid={ `${test1}element-order-details-label-order-date` }>
-            {/* {moment().subtract(dez, 'days').calendar()} */}
-            {moment().format('DD/MM/YYYY')}
+            {moment(e.sale_date).locale('pt-br').format('DD/MM/YYYY') }
           </h4>
           <h4
             data-testid={ `${test1}element-order-details-label-delivery-status` }

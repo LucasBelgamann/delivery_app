@@ -21,11 +21,12 @@ function Routes() {
         <Route path="/register" component={ Register } />
         <Route exact path="/customer/products" component={ CustomProducts } />
         <Route exact path="/customer/checkout" component={ CustomCheckout } />
-        <Route exact path="/customer/orders/:id" component={ CustomOrdersId } />
         <Route
+          exact
           path="/customer/orders"
           component={ CustomOrdersIdVenda }
         />
+        <Route exact path="/customer/orders/:id" component={ CustomOrdersId } />
         <Route exact path="/seller/orders" component={ SellOrders } />
         <Route exact path="/seller/orders/:id" component={ SellOrdersId } />
         <Route path="/admin/manage" component={ AdminManage } />
