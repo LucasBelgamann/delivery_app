@@ -29,7 +29,7 @@ function OrdersId() {
       setOrders(newData);
       console.log('orders', orders);
     };
-    handleStatusChange();
+    // handleStatusChange();
     getResponse();
   }, []);
 
@@ -56,7 +56,7 @@ function OrdersId() {
           <h4
             data-testid={ `${test1}element-order-details-label-delivery-status` }
           >
-            {e.status}
+            { e.status }
           </h4>
           <button
             type="button"
