@@ -34,10 +34,10 @@ function OrdersIdVenda() {
                 {e.status}
               </h4>
               <h4 data-testid={ `customer_orders__element-order-date-${e.id}` }>
-                {moment().format('DD/MM/YYYY')}
+                {moment(e.sale_date).locale('pt-br').format('DD/MM/YYYY') }
               </h4>
               <h4 data-testid={ `customer_orders__element-card-price-${e.id}` }>
-                {e.total_price}
+                {e.total_price.replace(/\./, ',')}
               </h4>
             </div>
           </Link>

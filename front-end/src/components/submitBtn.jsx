@@ -4,8 +4,13 @@ import PropTypes from 'prop-types';
 import { postData } from '../utils/requests';
 
 function SubmitBtn({
-  routeSuffix, sendObject, btnName,
-  setter = undefined, dataTestid, disabledBtn }) {
+  routeSuffix,
+  sendObject,
+  btnName,
+  setter = undefined,
+  dataTestid,
+  disabledBtn,
+}) {
   const [errorRequisiton, setErrorRequisition] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
 
@@ -14,15 +19,31 @@ function SubmitBtn({
   const vaipraonde = () => {
     const login = localStorage.getItem('user');
     const role = JSON.parse(login)?.role;
+    const roles = localStorage.getItem('role');
     if (!login || login === null) return navigate.replace('/login');
 
-    if (login && role === 'customer') {
+    if (
+      login
+      && window.location.pathname === '/login'
+      && role === 'customer'
+      && roles === 'customer'
+    ) {
       navigate.replace('/customer/products');
     }
-    if (login && role === 'administrator') {
+    if (
+      login
+      && window.location.pathname === '/login'
+      && role === 'administrator'
+      && roles === 'administrator'
+    ) {
       return navigate.replace('/admin/manage');
     }
-    if (login && role === 'seller') {
+    if (
+      login
+      && window.location.pathname === '/login'
+      && role === 'seller'
+      && role === 'seller'
+    ) {
       return navigate.replace('/seller/orders');
     }
   };
@@ -34,18 +55,29 @@ function SubmitBtn({
           localStorage.setItem('token', data.token);
           localStorage.setItem('role', data.dataValues.role);
           localStorage.setItem('name', data.dataValues.name);
-          localStorage.setItem('user', JSON.stringify({
-            name: data.dataValues.name,
-            role: data.dataValues.role,
-            token: data.token,
-            email: data.dataValues.email }));
+          localStorage.setItem(
+            'user',
+            JSON.stringify({
+              name: data.dataValues.name,
+              role: data.dataValues.role,
+              token: data.token,
+              email: data.dataValues.email,
+            }),
+          );
           if (setter) setter(false);
         } else {
           localStorage.setItem('token', data.token);
           localStorage.setItem('role', data.role);
           localStorage.setItem('name', data.name);
-          localStorage.setItem('user', JSON.stringify({
-            name: data.name, role: data.role, token: data.token, email: data.email }));
+          localStorage.setItem(
+            'user',
+            JSON.stringify({
+              name: data.name,
+              role: data.role,
+              token: data.token,
+              email: data.email,
+            }),
+          );
           if (setter) setter(true);
         }
         vaipraonde();
@@ -58,10 +90,8 @@ function SubmitBtn({
 
   function renderMessage() {
     return (
-      <span
-        data-testid="common_login__element-invalid-email"
-      >
-        { errorMessage }
+      <span data-testid="common_login__element-invalid-email">
+        {errorMessage}
       </span>
     );
   }
@@ -74,9 +104,9 @@ function SubmitBtn({
         data-testid={ dataTestid }
         disabled={ disabledBtn }
       >
-        { btnName }
+        {btnName}
       </button>
-      { errorRequisiton && renderMessage() }
+      {errorRequisiton && renderMessage()}
     </>
   );
 }

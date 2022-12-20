@@ -13,16 +13,13 @@ export default function FinishForm() {
     total,
   } = useContext(Context);
   const [ID, setId] = useState(2);
-  // console.log('idssss', sellers.map(({ id }) => id)[0]);
 
   useEffect(() => {
     const getId = async () => {
       const ids = await sellers.map(({ id }) => id)[0];
-      console.log('ids', ID);
       setId(ids);
     };
     getId();
-    console.log('ids', ID);
   }, []);
 
   const history = useHistory();
@@ -44,7 +41,7 @@ export default function FinishForm() {
   const handlesubmit = async () => {
     const { sales } = await postData('sales', postAddress);
     setStorage([]);
-    alert('Compra realizada com sucesso');
+    // alert('Compra realizada com sucesso');
     history.push(`/customer/orders/${sales.id}`);
   };
 
@@ -52,7 +49,6 @@ export default function FinishForm() {
     const getResponse = async () => {
       const { data } = await apiLogin.get('/login/seller');
       setSellers(data);
-      console.log('postAddress', postAddress);
     };
     getResponse();
   }, []);

@@ -8,7 +8,7 @@ import apiLogin from '../../utils/api';
 function OrdersId() {
   const { orders, setOrders, sellers } = useContext(Context);
   const { id } = useParams();
-  const test1 = 'customer_order_details__';
+  const test1 = 'seller_order_details__';
   const tableHead = [
     'Item',
     'Descrição',
@@ -17,15 +17,8 @@ function OrdersId() {
     'Sub-total',
   ];
 
-  const handlePrepararPedido = async () => {
-    const update = await apiLogin.patch(`/sales/${id}`, { status: 'Preparando' });
-    window.location.reload();
-    return update;
-  };
-
-  const handleSaiuEntregar = async () => {
-    const update = await apiLogin.patch(`/sales/${id}`, { status: 'Em Trânsito' });
-    window.location.reload();
+  const handleStatusChange = async (status) => {
+    const update = await apiLogin.patch(`/sales/${id}`, { status });
     return update;
   };
 
@@ -36,6 +29,7 @@ function OrdersId() {
       setOrders(newData);
       console.log('orders', orders);
     };
+    handleStatusChange();
     getResponse();
   }, []);
 
@@ -57,8 +51,7 @@ function OrdersId() {
             {e.id}
           </h4>
           <h4 data-testid={ `${test1}element-order-details-label-order-date` }>
-            {/* {moment().subtract(dez, 'days').calendar()} */}
-            {moment().format('DD/MM/YYYY')}
+            {moment(e.sale_date).locale('pt-br').format('DD/MM/YYYY') }
           </h4>
           <h4
             data-testid={ `${test1}element-order-details-label-delivery-status` }
@@ -67,17 +60,17 @@ function OrdersId() {
           </h4>
           <button
             type="button"
-            onClick={ handlePrepararPedido }
-            data-testid="customer_order_details__button-delivery-check"
-            disabled={ e.status === 'Entregue' }
+            onClick={ () => handleStatusChange('Preparando') }
+            data-testid="seller_order_details__button-preparing-check"
+            disabled={ e.status !== 'Pendente' }
           >
-            Preparar pedido
+            Preparar Pedido
           </button>
           <button
             type="button"
-            onClick={ handleSaiuEntregar }
-            data-testid="customer_order_details__button-delivery-check"
-            disabled={ e.status === 'Entregue' }
+            onClick={ () => handleStatusChange('Em Trânsito') }
+            data-testid="seller_order_details__button-dispatch-check"
+            disabled={ e.status !== 'Preparando' }
           >
             Saiu para a entrega
           </button>
@@ -129,7 +122,7 @@ function OrdersId() {
       <p>
         TOTAL DO PEDIDO R$
         {' '}
-        <span data-testid="customer_order_details__element-order-total-price">
+        <span data-testid="seller_order_details__element-order-total-price">
           {orders.map((product) => product.products
             .reduce(
               (acc, e) => Number(e.salesProducts.quantity) * Number(e.price) + acc,

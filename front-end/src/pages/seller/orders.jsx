@@ -31,21 +31,21 @@ export default function Orders() {
         {sellerSales.map((e, i) => (
           <Link to={ `/seller/orders/${e.id}` } key={ i }>
             <div className="pedidos">
-              <h4 data-testid={ `customer_orders__element-order-id-${e.id}` }>
+              <h4 data-testid={ `seller_orders__element-order-id-${e.id}` }>
                 {e.id}
               </h4>
               <h4
-                data-testid={ `customer_orders__element-delivery-status-${e.id}` }
+                data-testid={ `seller_orders__element-delivery-status-${e.id}` }
               >
                 {e.status}
               </h4>
-              <h4 data-testid={ `customer_orders__element-order-date-${e.id}` }>
-                {moment().format('DD/MM/YYYY')}
+              <h4 data-testid={ `seller_orders__element-order-date-${e.id}` }>
+                {moment(e.sale_date).locale('pt-br').format('DD/MM/YYYY') }
               </h4>
-              <h4 data-testid={ `customer_orders__element-card-price-${e.id}` }>
+              <h4 data-testid={ `seller_orders__element-card-price-${e.id}` }>
                 {e.total_price}
               </h4>
-              <h6 data-testid={ `customer_orders__element-card-price-${e.id}` }>
+              <h6 data-testid={ `seller_orders__element-card-address-${e.id}` }>
                 {`${e.delivery_address}, ${e.delivery_number}`}
               </h6>
             </div>

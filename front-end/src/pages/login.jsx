@@ -24,11 +24,14 @@ function Login() {
 
   useEffect(() => {
     const login = localStorage.getItem('user');
-    const role = JSON.parse(login)?.role;
+    // const role = JSON.parse(login)?.role;
+    const role = localStorage.getItem('role');
+    console.log('role', role);
+
     if (!login || login === null) return history.replace('/login');
 
     if (login && role === 'customer') {
-      history.replace('/customer/products');
+      return history.replace('/customer/products');
     }
     if (login && role === 'administrator') {
       return history.push('/admin/manage');
