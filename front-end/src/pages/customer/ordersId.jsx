@@ -17,9 +17,8 @@ function OrdersId() {
     'Sub-total',
   ];
 
-  const handleEntregue = async () => {
-    const update = await apiLogin.patch(`/sales/${id}`, { status: 'Entregue' });
-    window.location.reload();
+  const handleStatusChange = async (status) => {
+    const update = await apiLogin.patch(`/sales/${id}`, { status });
     return update;
   };
 
@@ -60,7 +59,7 @@ function OrdersId() {
           </h4>
           <button
             type="button"
-            onClick={ handleEntregue }
+            onClick={ () => handleStatusChange('Entregue') }
             data-testid="customer_order_details__button-delivery-check"
             disabled={ e.status !== 'Em Trânsito' }
           >

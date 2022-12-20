@@ -63,6 +63,7 @@ function SubmitBtn({
               token: data.token,
               email: data.dataValues.email,
             }),
+            navigate.push('/customer/products'),
           );
           if (setter) setter(false);
         } else {
