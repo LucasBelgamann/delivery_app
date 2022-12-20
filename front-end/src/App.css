@@ -1,5 +1,5 @@
 body {
-  background-color: #0d0d0d;
+  background-color: #e6e6e6;
   color: white;
 }
 
@@ -201,6 +201,7 @@ body {
   align-items: center;
   background-color: black;
   display: flex;
+  height: 9vh;
   justify-content: space-around;
 }
 
@@ -214,3 +215,51 @@ body {
   width: 30%;
 }
 
+.container-table-Cus table {
+  background-color: black;
+  border-radius: 10px;
+  color: white;
+  font-size: 20px;
+  font-weight: 400;
+  padding: 5px;
+  text-align: center;
+  width: 65vw;
+}
+
+.container-table-Cus thead tr, .inicial-table {
+  background-color: rgba(113, 113, 120, 0.78);
+  color: white;
+}
+
+.container-table-Cus td {
+  border: solid 1px rgb(255, 255, 255);
+  padding: 10px;
+}
+
+.container-pai-Cus {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.total-pedido {
+  text-align: right;
+}
+
+.btn-remove {
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 15px;
+  height: 3vw;
+  transition: background-color color;
+  transition-duration: 1.3s;
+  width: 15vw;
+}
+
+.btn-remove:hover {
+  background-color: transparent;
+  border: solid 2px white;
+  color: white;
+}
