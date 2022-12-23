@@ -18,7 +18,9 @@ function SubmitBtnAdmin({
         .then(({ data }) => {
           if (setter) setter(data);
           navigate.push(navigation);
-          // setErrorMessage('Usuário cadastrado com sucesso!');
+          setErrorMessage('Usuário cadastrado com sucesso!');
+          setErrorRequisition(true);
+          window.location.reload();
           // setInterval(() => {
           //   window.location.reload();
           // }, TIME);
@@ -26,6 +28,7 @@ function SubmitBtnAdmin({
     } catch ({ response }) {
       setErrorMessage(response.data.message);
       setErrorRequisition(true);
+      window.location.reload();
     }
   }
 
