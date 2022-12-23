@@ -12,17 +12,16 @@ function SubmitBtnAdmin({
   const navigate = useHistory();
 
   function handleSubmit() {
-    const TIME = 1000;
+    // const TIME = 1000;
     try {
       postData(routeSuffix, sendObject)
         .then(({ data }) => {
           if (setter) setter(data);
           navigate.push(navigation);
-          setErrorMessage('Usuário cadastrado com sucesso!');
-          setErrorRequisition(true);
-          setInterval(() => {
-            window.location.reload();
-          }, TIME);
+          // setErrorMessage('Usuário cadastrado com sucesso!');
+          // setInterval(() => {
+          //   window.location.reload();
+          // }, TIME);
         });
     } catch ({ response }) {
       setErrorMessage(response.data.message);
