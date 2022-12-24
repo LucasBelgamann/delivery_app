@@ -1,6 +1,7 @@
 body {
-  background-color: #e6e6e6;
-  color: white;
+  background-color: #252525;
+  color: #e1e1e1;
+  text-decoration: none;
 }
 
 
@@ -232,7 +233,7 @@ body {
 }
 
 .container-table-Cus td {
-  border: solid 1px rgb(255, 255, 255);
+  border: solid 1px white;
   padding: 10px;
 }
 
