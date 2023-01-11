@@ -1,7 +1,45 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../../components/navbar';
+import Navbar from '../../components/NavBar';
 import SubmitBtnAdmin from '../../components/submitBtnAdmin';
-import { CSS } from '../login';
+
+export const CSS = {
+  Section: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100vw',
+    height: '100vh',
+  },
+  Form: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '30vw',
+    height: '50vh',
+    border: '1px solid #e1e1e6',
+    borderRadius: '10px',
+  },
+  Label: {
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    maxWidth: '25vw',
+    width: '100%',
+    margin: '10px',
+    fontSize: '1.5rem',
+  },
+  Input: {
+    width: '70%',
+    height: '3vh',
+    borderRadius: '5px',
+    border: 'none',
+    outline: 'none',
+    backgroundColor: '#1e1e1e',
+    color: 'white',
+    fontSize: '1.2rem',
+  },
+};
 
 function Manage() {
   const [loginInput, setLogin] = useState({

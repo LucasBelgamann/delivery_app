@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from '../../components/navbar';
+import NavBar from '../../components/NavBar';
 import Context from '../../context/context';
 import apiLogin from '../../utils/api';
 
@@ -20,7 +20,7 @@ function OrdersIdVenda() {
 
   return (
     <>
-      <Navbar />
+      <NavBar />
       <div className="container-pedidos">
         {pedidos.map((e, i) => (
           <Link key={ i } to={ `/customer/orders/${e.id}` }>

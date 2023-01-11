@@ -1,0 +1,140 @@
+.container {
+  align-items: center;
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  height: 8vh;
+  justify-content: space-around;
+}
+
+.btns-nav {
+  background-color: #7e4ccb;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  height: 4vh;
+  margin-left: 20px;
+  transition: background-color color border;
+  transition-duration: 0.5s;
+  width: 9vw;
+}
+
+.btns-nav:hover {
+  background-color: #272530;
+  border: 2px solid #7e4ccb;
+  color: #7e4ccb;
+}
+
+.cart {
+  background-color: black;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-weight: 900;
+  height: 4vh;
+  margin-left: 20px;
+}
+
+.cart img {
+  margin-right: 10px;
+}
+
+.btn-menu {
+  color: white;
+}
+
+* {
+  list-style: none;
+}
+
+.navbar {
+  align-items: center;
+  background-color: black;
+  color: white;
+  display: flex;
+  height: 80px;
+  justify-content: space-around;
+  width: 100%;
+  z-index: 1;
+}
+
+.menu-bars {
+  background: none;
+  cursor: pointer;
+  font-size: 2rem;
+  margin-left: 2rem;
+}
+
+.nav-menu {
+  background-color: #272530;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  transform: translateX(-1%);
+  transition: 850ms;
+  width: 300px;
+  z-index: 2;
+}
+
+.nav-menu.active {
+  display: flex;
+  height: 100vh;
+  justify-content: start;
+  list-style: none;
+  padding: 8px 0 8px 16px;
+  text-decoration: none;
+  transform: translateX(-110%);
+}
+
+.nav-text a {
+  align-items: center;
+  border-radius: 4px;
+  color: white;
+  display: flex;
+  font-size: 18px;
+  height: 100%;
+  margin: 0 0 15px 35px;
+  padding: 5px 16px;
+  text-decoration: none;
+  width: 80%;
+}
+
+.nav-text a:hover {
+  background-color: #7e4ccb;
+  color: white;
+}
+
+.nav-menu-items {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.nav-menu-items button {
+  font-size: 15px;
+  height: 7vh;
+  margin-bottom: 20px;
+  width: 12vw;
+}
+
+.navbar-toggle {
+  align-items: center;
+  background-color: #272530;
+  color: white;
+  display: flex;
+  height: 20vh;
+  justify-content: start;
+  width: 100%;
+}
+
+@media screen and ( min-width : 200px ) and ( max-width : 700px ) {
+
+  .nav-menu-items button {
+    font-size: 17px;
+    height: 5vh;
+    width: 45vw;
+  }
+}

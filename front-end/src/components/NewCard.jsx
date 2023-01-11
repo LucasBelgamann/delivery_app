@@ -10,6 +10,53 @@ export default function NewCard() {
     setQuantityWithInput,
   } = useContext(Context);
 
+  // const arrayImg = [
+  //   {
+  //     id: 1,
+  //     url: 'https://giassi.vtexassets.com/arquivos/ids/541441/Cerveja-Pilsen-Skol-Lata-350ml.png?v=638053328959330000',
+  //   },
+  //   {
+  //     id: 2,
+  //     url: 'https://gbarbosa.vtexassets.com/arquivos/ids/174966/62853e8124d5d4e1f36b500e.png?v=637884962731900000',
+  //   },
+  //   {
+  //     id: 3,
+  //     url: 'https://s3-us-west-2.amazonaws.com/varejao.ip/7891991011105-cerveja-300ml-antarctica-retornavel.png',
+  //   },
+  //   {
+  //     id: 4,
+  //     url: 'https://choppbrahmaexpress.vtexassets.com/arquivos/ids/155796/brahma_-_600ml.png?v=637353454952430000',
+  //   },
+  //   {
+  //     id: 5,
+  //     url: 'https://static23.minhalojanouol.com.br/clgatacado/produto/20200410020112_7043992957_D.png',
+  //   },
+  //   {
+  //     id: 6,
+  //     url: 'https://lirp.cdn-website.com/67675e44/dms3rep/multi/opt/PRODUTOS+DESTAQUES+%281%29-400w.png',
+  //   },
+  //   {
+  //     id: 7,
+  //     url: 'https://choppbrahmaexpress.vtexassets.com/arquivos/ids/155589/70ca1861a6e7b5e4da6c69af29a970dc.png?v=637353454279370000',
+  //   },
+  //   {
+  //     id: 8,
+  //     url: 'https://www.supermercadosbh.com.br/wp-content/uploads/2020/10/Cerveja-Brama-Duplo-Malte-Lata-350ml.png',
+  //   },
+  //   {
+  //     id: 9,
+  //     url: 'https://magento.choppbrahmaexpress.com.br/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/b/e/becks_600ml.png',
+  //   },
+  //   {
+  //     id: 10,
+  //     url: 'https://supermercadosimperatriz.vteximg.com.br/arquivos/ids/157184-1000-1000/BEB-SKOL-269ML-BEATS-LT-SENSES.png?v=637734307910870000',
+  //   },
+  //   {
+  //     id: 11,
+  //     url: 'https://www.bernardaoemcasa.com.br/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/b/4/b46d07210453f80e27ad4714ed65980e.png',
+  //   },
+  // ];
+
   const handleInputChange = (product, value) => {
     setQuantityWithInput({ ...product, quantity: Number(value),
     });

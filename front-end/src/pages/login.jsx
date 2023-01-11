@@ -1,45 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import SubmitBtn from '../components/submitBtn';
-
-export const CSS = {
-  Section: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100vw',
-    height: '100vh',
-  },
-  Form: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '30vw',
-    height: '50vh',
-    border: '1px solid #e1e1e6',
-    borderRadius: '10px',
-  },
-  Label: {
-    display: 'flex',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    maxWidth: '25vw',
-    width: '100%',
-    margin: '10px',
-    fontSize: '1.5rem',
-  },
-  Input: {
-    width: '70%',
-    height: '3vh',
-    borderRadius: '5px',
-    border: 'none',
-    outline: 'none',
-    backgroundColor: '#1e1e1e',
-    color: 'white',
-    fontSize: '1.2rem',
-  },
-};
+import '../css/login.css';
 
 function Login() {
   const [loginInput, setLogin] = useState({
@@ -82,50 +44,57 @@ function Login() {
   }, [history]);
 
   return (
-    <section style={ CSS.Section }>
-      <form style={ CSS.Form }>
-        <p>John Entrega!</p>
-        <label htmlFor="email" style={ CSS.Label }>
-          Login:
+    <section className="container-login">
+      <h2 className="title-login">John Delivery</h2>
+      <form className="form">
+        <div className="input-container">
           <input
-            type="email"
-            data-testid="common_login__input-email"
+            type="text"
             value={ loginInput.email }
             onChange={ handleChange }
+            id="Login"
+            className="text-input"
             name="email"
-            placeholder=" email"
-            style={ CSS.Input }
+            autoComplete="off"
+            placeholder="Enter your email"
+            required
           />
-        </label>
-        <label htmlFor="password" style={ CSS.Label }>
-          Senha:
+          <label className="label" htmlFor="Login">Email</label>
+        </div>
+        <div className="input-container">
           <input
             type="password"
-            data-testid="common_login__input-password"
             value={ loginInput.password }
             onChange={ handleChange }
+            id="password"
+            className="text-input"
             name="password"
-            placeholder=" password"
-            style={ CSS.Input }
+            autoComplete="off"
+            placeholder="Enter your password"
+            required
           />
-        </label>
-        <SubmitBtn
-          dataTestid="common_login__button-login"
-          routeSuffix="login"
-          sendObject={ loginInput }
-          navigation="/customer/products"
-          btnName="LOGIN"
-          disabledBtn={ disabledBtn }
-        />
-        <button
-          type="submit"
-          data-testid="common_login__button-register"
-          onClick={ () => history.push('/register') }
-        >
-          Ainda não tenho conta
-        </button>
-        <p data-testid="common_login__element-invalid-email" />
+          <label className="label" htmlFor="Login">Password</label>
+        </div>
+        <div className="btns-container">
+          <SubmitBtn
+            dataTestid="common_login__button-login"
+            routeSuffix="login"
+            sendObject={ loginInput }
+            navigation="/customer/products"
+            btnName="LOGIN"
+            disabledBtn={ disabledBtn }
+          />
+          <button
+            type="submit"
+            data-testid="common_login__button-register"
+            className="btn-login"
+            onClick={ () => history.push('/register') }
+          >
+            Cadastrar
+          </button>
+        </div>
       </form>
+      <p data-testid="common_login__element-invalid-email" />
     </section>
   );
 }

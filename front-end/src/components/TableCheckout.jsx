@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import Context from '../context/context';
 import FinishForm from './FinishForm';
+import '../css/checkout.css';
+import trash from '../images/trash.png';
 
 export default function TableCheckout() {
   const { storage, setStorage } = useContext(Context);
@@ -32,68 +34,61 @@ export default function TableCheckout() {
               ))}
             </tr>
           </thead>
-          {
-            storage.map((e, i) => (
-              <tr key={ e.id }>
-                <td
-                  className="inicial-table"
-                  data-testid={ `${test}element-order-table-item-number-${i}` }
+          {storage.map((e, i) => (
+            <tr key={ e.id }>
+              <td
+                className="inicial-table"
+                data-testid={ `${test}element-order-table-item-number-${i}` }
+              >
+                {i + 1}
+              </td>
+              <td data-testid={ `${test}element-order-table-name-${i}` }>
+                {e.name}
+              </td>
+              <td data-testid={ `${test}element-order-table-quantity-${i}` }>
+                {e.quantity}
+              </td>
+              <td>
+                R$
+                {' '}
+                <span
+                  data-testid={ `${test}element-order-table-unit-price-${i}` }
                 >
-                  {i + 1}
-                </td>
-                <td
-                  data-testid={ `${test}element-order-table-name-${i}` }
+                  {e.price.replace(/\./, ',')}
+                </span>
+              </td>
+              <td>
+                R$
+                {' '}
+                <span data-testid={ `${test}element-order-table-sub-total-${i}` }>
+                  {(e.price * e.quantity).toFixed(2).replace(/\./, ',')}
+                </span>
+              </td>
+              <td>
+                <button
+                  className="btn-remove"
+                  onClick={ () => removeQuantity(e.id) }
+                  data-testid={ `${test}element-order-table-remove-${i}` }
+                  type="button"
                 >
-                  {e.name}
-                </td>
-                <td
-                  data-testid={ `${test}element-order-table-quantity-${i}` }
-                >
-                  {e.quantity}
-
-                </td>
-                <td>
-                  R$
-                  {' '}
-                  <span
-                    data-testid={ `${test}element-order-table-unit-price-${i}` }
-                  >
-                    {e.price.replace(/\./, ',')}
-
-                  </span>
-                </td>
-                <td>
-                  R$
-                  {' '}
-                  <span
-                    data-testid={ `${test}element-order-table-sub-total-${i}` }
-                  >
-                    {(e.price * e.quantity).toFixed(2).replace(/\./, ',')}
-
-                  </span>
-                </td>
-                <td>
-                  <button
-                    className="btn-remove"
-                    onClick={ () => removeQuantity(e.id) }
-                    data-testid={ `${test}element-order-table-remove-${i}` }
-                    type="button"
-                  >
-                    Remover
-
-                  </button>
-                </td>
-              </tr>
-            ))
-          }
+                  <img width="25" height="25" src={ trash } alt="Remove" />
+                </button>
+              </td>
+            </tr>
+          ))}
         </table>
-        <p className="total-pedido">
-          TOTAL DO PEDIDO R$
-          {' '}
-          <span data-testid="customer_checkout__element-order-total-price">
-            {storage.reduce((acc, c) => c.price * c.quantity + acc, 0).toFixed(2).replace(/\./, ',')}
+        <div className="total-pedido">
+          <span
+            data-testid="customer_checkout__element-order-total-price"
+          >
+            TOTAL DO PEDIDO R$
+            {' '}
+            {storage
+              .reduce((acc, c) => c.price * c.quantity + acc, 0)
+              .toFixed(2)
+              .replace(/\./, ',')}
           </span>
-        </p>
+        </div>
       </div>
       <FinishForm />
     </div>

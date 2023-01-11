@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import SubmitBtn from '../components/submitBtn';
-import { CSS } from './login';
 
 function Register() {
   const [loginInput, setLogin] = useState({
@@ -27,47 +26,50 @@ function Register() {
   };
 
   return (
-    <section style={ CSS.Section }>
-      <form style={ CSS.Form }>
-        <label htmlFor="name" style={ CSS.Label }>
-          Nome:
+    <section className="container-login">
+      <h2 className="title-register">John Delivery</h2>
+      <form className="form">
+        <div className="input-container">
           <input
             id="name"
             type="name"
             data-testid="common_register__input-name"
+            className="text-input"
             value={ loginInput.name }
             onChange={ handleChange }
             name="name"
+            autoComplete="off"
             placeholder=" seu nome"
-            style={ CSS.Input }
           />
-        </label>
-        <label htmlFor="email" style={ CSS.Label }>
-          Email:
+          <label htmlFor="name" className="label">Nome</label>
+        </div>
+        <div className="input-container">
           <input
             id="email"
             type="email"
             data-testid="common_register__input-email"
+            className="text-input"
             value={ loginInput.email }
+            autoComplete="off"
             onChange={ handleChange }
             name="email"
             placeholder=" seu-email@site.com.br"
-            style={ CSS.Input }
           />
-        </label>
-        <label htmlFor="password" style={ CSS.Label }>
-          Senha:
+          <label htmlFor="email" className="label">Email</label>
+        </div>
+        <div className="input-container">
           <input
             id="password"
             type="password"
             data-testid="common_register__input-password"
+            className="text-input"
             value={ loginInput.password }
             onChange={ handleChange }
             name="password"
             placeholder=" ********"
-            style={ CSS.Input }
           />
-        </label>
+          <label htmlFor="password" className="label">Senha</label>
+        </div>
         <SubmitBtn
           dataTestid="common_register__button-register"
           routeSuffix="register"

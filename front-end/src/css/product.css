@@ -1,0 +1,174 @@
+.container-products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 30px auto;
+  width: 80%;
+}
+
+.cart-total {
+  background-color: #7e4ccb;
+  border: none;
+  border-radius: 10px;
+  bottom: 20px;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  min-height: 80px;
+  min-width: 300px;
+  position: fixed;
+  right: 20px;
+  transition: background-color;
+  transition-duration: 1s;
+  z-index: 3;
+}
+
+.card {
+  background-color: black;
+  border-radius: 25px;
+  height: 300px;
+  margin: 10px;
+  overflow: hidden;
+  position: relative;
+  width: 235px;
+}
+
+.card:before {
+  background-color: #2f2c45;
+  content: '';
+  height: 100%;
+  position: absolute;
+  top: -50%;
+  transform: skewY(345deg);
+  transition: 0.5s;
+  width: 100%;
+}
+
+.card:hover:before {
+  background-color: #7e4ccb;
+  top: -70%;
+  transform: skewY(390deg);
+}
+
+.card:after {
+  bottom: 0;
+  color: #090808;
+  content: 'JOHN';
+  font-size: 5.5rem;
+  font-weight: 600;
+  left: 0;
+  position: absolute;
+}
+
+.card .imgBx {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.card .imgBx img {
+  max-width: 20%;
+  transition: 0.5s;
+}
+
+.card:hover .imgBx img {
+  max-width: 22%;
+}
+
+.card .contentBx {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.card .contentBx h3 {
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.card .contentBx .price {
+  color: rgb(170, 170, 170);
+  font-size: 21px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.card .contentBx .buy {
+  border-radius: 30px;
+  color: white;
+  letter-spacing: 1px;
+  margin-top: 10px;
+  opacity: 0;
+  padding: 10px 20px;
+  position: relative;
+  text-transform: uppercase;
+  top: 200px;
+  transition: 0.5s;
+}
+
+.card .contentBx .buy input {
+  font-size: 15px;
+  height: 28px;
+  margin: 0 7px;
+  text-align: center;
+  width: 28px;
+}
+
+.card .contentBx .buy button {
+  background-color: #7e4ccb;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  font-size: 22px;
+  height: 38px;
+  width: 38px;
+}
+
+.card:hover .contentBx .buy {
+  opacity: 1;
+  top: 0;
+}
+
+@media screen and ( min-width : 200px ) and ( max-width : 700px ) {
+
+  .container-products {
+    width: 97vw;
+  }
+
+  .card {
+    border-radius: 15px;
+    height: 250px;
+    margin: 5px;
+    width: 170px;
+  }
+
+  .card .contentBx .buy {
+    top: 650px;
+  }
+
+  .card .contentBx .buy button {
+    height: 6vw;
+    width: 6vw;
+  }
+
+  .card .contentBx .buy input {
+    height: 4vw;
+    width: 4vw;
+  }
+
+  .card .contentBx .price {
+    font-size: 17px;
+  }
+}

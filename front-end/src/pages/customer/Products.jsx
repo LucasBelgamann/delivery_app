@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import apiLogin from '../../utils/api';
-import NavBar from '../../components/navbar';
-import ProductCard from '../../components/ProductCard';
+// import NewNav from '../../components/newNav';
 import Context from '../../context/context';
-// import NewCard from '../../components/NewCard';
+import NewCard from '../../components/NewCard';
+import NavBar from '../../components/NavBar';
+import '../../css/product.css';
 
 export default function Products() {
   const {
@@ -31,10 +32,11 @@ export default function Products() {
 
   return (
     <div>
+      {/* <NewNav /> */}
       <NavBar />
       <div className="container-products">
-        {/* <NewCard /> */}
-        <ProductCard />
+        <NewCard />
+        {/* <ProductCard /> */}
       </div>
       <div>
         <button

@@ -1,7 +1,7 @@
 import moment from 'moment/moment';
 import { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Navbar from '../../components/navbar';
+import Navbar from '../../components/NavBar';
 import Context from '../../context/context';
 import apiLogin from '../../utils/api';
 

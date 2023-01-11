@@ -1,0 +1,119 @@
+.input-container {
+  position: relative;
+  width: 280px;
+}
+
+.label {
+  color: #b3b3b3;
+  left: 10px;
+  padding: 0 2px;
+  position: absolute;
+  top: 14px;
+  transition: all 0.2s;
+  z-index: 1;
+}
+
+.text-input {
+  background: #272530;
+  border: 2px solid #2f2c45;
+  border-radius: 5px;
+  color: white;
+  font-size: 18px;
+  height: 100%;
+  outline: none;
+  padding: 0.8rem;
+  text-align: center;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.label:before {
+  background: #272530;
+  content: '';
+  height: 5px;
+  left: 0;
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  z-index: -1;
+}
+
+.text-input:focus {
+  border: 2px solid #7e4ccb;
+}
+
+.text-input:focus + .label, .filled {
+  color: #7e4ccb;
+  font-size: 14px;
+  top: -10px;
+}
+
+.text-input::placeholder {
+  font-size: 16px;
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.text-input:focus::placeholder {
+  opacity: 1;
+}
+
+.finish-btn {
+  background-color: #7e4ccb;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  height: 7vh;
+  transition: background-color color border;
+  transition-duration: 0.5s;
+  width: 15vw;
+}
+
+.finish-btn:hover {
+  background-color: #272530;
+  border: 2px solid #7e4ccb;
+  color: #7e4ccb;
+}
+
+.container-finishform {
+  align-items: center;
+  background-color: black;
+  border-radius: 10px;
+  display: flex;
+  height: 50vh;
+  justify-content: space-around;
+  margin: auto;
+  min-width: 65vw;
+}
+
+.container-finishform div {
+  margin: 15px 0;
+}
+
+.container-pai {
+  display: flex;
+  justify-content: space-around;
+}
+
+.motoboy {
+  width: 30vw;
+}
+
+@media screen and ( min-width : 200px ) and ( max-width : 700px ) {
+
+  .container-finishform {
+    width: 90vw;
+  }
+
+  .finish-btn {
+    font-size: 12px;
+    height: 4vh;
+    padding: 5px;
+    width: 32vw;
+  }
+
+  .motoboy {
+    display: none;
+  }
+}

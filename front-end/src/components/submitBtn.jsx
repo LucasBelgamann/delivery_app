@@ -105,6 +105,7 @@ function SubmitBtn({
         onClick={ () => handleSubmit() }
         data-testid={ dataTestid }
         disabled={ disabledBtn }
+        className="btn-login"
       >
         {btnName}
       </button>

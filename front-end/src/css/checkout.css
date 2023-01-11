@@ -1,0 +1,88 @@
+.pedidos {
+  background-color: white;
+  border-radius: 10px;
+  color: black;
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+  width: 30%;
+}
+
+.container-table-Cus table {
+  background-color: black;
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  font-weight: 400;
+  padding: 5px;
+  text-align: center;
+  width: 65vw;
+}
+
+.container-table-Cus thead tr, .inicial-table {
+  color: #7e4ccb;
+}
+
+.container-table-Cus td {
+  border: solid 1px white;
+  padding: 5px;
+}
+
+.container-pai-Cus {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.total-pedido {
+  background-color: #7e4ccb;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 20px;
+  margin: 20px 0;
+  min-width: 15vw;
+  padding: 15px;
+}
+
+.btn-remove {
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 15px;
+  height: 2vw;
+  padding: 3px;
+  transition: background-color color;
+  transition-duration: 1s;
+  width: 2vw;
+}
+
+.btn-remove:hover {
+  background-color: red;
+  color: white;
+}
+
+@media screen and ( min-width : 200px ) and ( max-width : 700px  ) {
+
+  .btn-remove {
+    height: 5vw;
+    padding: 3px;
+    width: 7vw;
+  }
+
+  .btn-remove img {
+    height: 3vw;
+    width: 3vw;
+  }
+
+  .total-pedido {
+    font-size: 15px;
+    min-width: 50vw;
+  }
+
+  .pedidos {
+    font-size: 15px;
+    width: 70%;
+  }
+}
