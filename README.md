@@ -23,7 +23,7 @@ Em resumo sera feito a comunicação entre clientes e pessoas vendedoras: a pess
 
 # Como foi desenvolvimento
 
-<img src="https://raw.githubusercontent.com/LucasBelgamann/delivery_app/main/deliveryApp.jpg" alt="foto-do-projeto" width="200" heigth="100" />
+<img src="https://raw.githubusercontent.com/LucasBelgamann/delivery_app/main/deliveryApp.jpg" alt="foto-do-projeto" width="200px" heigth="100px" />
 
 ## Rodando o projeto localmente
 
