@@ -29,8 +29,8 @@ Em resumo sera feito a comunicação entre clientes e pessoas vendedoras: a pess
   </summary><br>
 <strong>1. Faça o git clone na sua máquina e entre no diretório:</strong><br>
  - Lembre-se de clonar o repositório no diretório desejado na sua máquina!<br>
-  `git git@github.com:LucasBelgamann/delivery_app.git`
-   `cd delivery_app`
+ `git git@github.com:LucasBelgamann/delivery_app.git`
+ `cd delivery_app`
 
  - Após isso rode o seguinte comanda para iniciar um container MySql!<br>
  `docker run --name mysql-docker -e MYSQL_ROOT_PASSWORD=password -d -p 3306:3306 mysql`
