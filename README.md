@@ -21,6 +21,10 @@ Em resumo sera feito a comunicação entre clientes e pessoas vendedoras: a pess
 - <a href="https://v5.reactrouter.com/web/guides/quick-start" target="blanck" >React router dom</a> - Biblioteca para utilização de rotas.
 - <a href="https://eslint.org/" target="blanck" >ESlint</a> - Biblioteca para corrigir problemas.
 
+# Como foi desenvolvimento
+
+<img src="./deliveryApp.jpg" alt="foto-do-projeto" width="200" heigth="100" />
+
 ## Rodando o projeto localmente
 
 <details>
@@ -28,15 +32,16 @@ Em resumo sera feito a comunicação entre clientes e pessoas vendedoras: a pess
     <strong>Instruções</strong>
   </summary><br>
 <h3>1. Faça o git clone na sua máquina e entre no diretório:</h3><br>
+
  - Lembre-se de clonar o repositório no diretório desejado na sua máquina!<br>
- git git@github.com:LucasBelgamann/delivery_app.git<br>
- cd delivery_app<br>
+ `git git@github.com:LucasBelgamann/delivery_app.git`<br>
+ `cd delivery_app`<br>
 
  - Após isso rode o seguinte comanda para iniciar um container MySql!<br>
  `docker run --name mysql-docker -e MYSQL_ROOT_PASSWORD=password -d -p 3306:3306 mysql`
  - Executar um `npm install` na raiz do projeto, e por fim os seguintes comandos para iniciar o projeto!<br>
- `cd back-end`
- `npm run dev`
- `cd front-end`
- `npm start`
+ `cd back-end`<br>
+ `npm run dev`<br>
+ `cd front-end`<br>
+ `npm start`<br>
  </details>
