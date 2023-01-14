@@ -5,6 +5,10 @@ Nessa aplicação, o grupo foi responsável por criar e integrar tanto o back-en
 Ter acesso via login: tanto clientes como pessoas vendedoras, assim como o administrador do sistema, devem ter acesso ao aplicativo via login, porém para funções diferentes: (1) A pessoa cliente, que compra da lista de produtos; (2) A pessoa vendedora, que aprova, prepara e entrega; (3) A pessoa administradora, que gerencia quem usa o aplicativo.
 Em resumo sera feito a comunicação entre clientes e pessoas vendedoras: a pessoa cliente faz o pedido via "carrinho de compras" e a pessoa vendedora aprova, prepara e envia esse pedido. Quando o produto é recebido por quem comprou, essa pessoa marca o pedido como "recebido". Ambos devem possuir detalhes sobre seus pedidos.
 
+# Projeto
+
+<img src="https://raw.githubusercontent.com/LucasBelgamann/delivery_app/main/deliveryApp.jpg" alt="foto-do-projeto" width="700px" heigth="350px" />
+
 # Como foi desenvolvimento
 
 <a href="https://www.betrybe.com/" target="blanck" ><img src="https://blog.betrybe.com/wp-content/uploads/2021/11/51808343.png" width="33" height="33" alt="Jest" /></a> - Esse projeto foi feito em equipe dentro da organização da trybe.
@@ -20,10 +24,6 @@ Em resumo sera feito a comunicação entre clientes e pessoas vendedoras: a pess
 - <a href="https://pt-br.reactjs.org/" target="blanck" >React</a> - O framework utilizado.
 - <a href="https://v5.reactrouter.com/web/guides/quick-start" target="blanck" >React router dom</a> - Biblioteca para utilização de rotas.
 - <a href="https://eslint.org/" target="blanck" >ESlint</a> - Biblioteca para corrigir problemas.
-
-# Como foi desenvolvimento
-
-<img src="https://raw.githubusercontent.com/LucasBelgamann/delivery_app/main/deliveryApp.jpg" alt="foto-do-projeto" width="700px" heigth="350px" />
 
 ## Rodando o projeto localmente
 
