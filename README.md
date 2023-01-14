@@ -37,7 +37,7 @@ Em resumo sera feito a comunicação entre clientes e pessoas vendedoras: a pess
  `git git@github.com:LucasBelgamann/delivery_app.git`<br>
  `cd delivery_app`<br>
 
- - Após isso rode o seguinte comanda para iniciar um container MySql!<br>
+ - Após isso rode o seguinte comando para iniciar um container MySql!<br>
  `docker run --name mysql-docker -e MYSQL_ROOT_PASSWORD=password -d -p 3306:3306 mysql`
  - Executar um `npm install` na raiz do projeto, e por fim os seguintes comandos para iniciar o projeto!<br>
  `cd back-end`<br>
