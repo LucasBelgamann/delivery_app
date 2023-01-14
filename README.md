@@ -2,7 +2,7 @@
 
 Nessa aplicação, o grupo foi responsável por criar e integrar tanto o back-end quanto o front-end, sendo o principal objetivo desenvolver um app de delivery para uma distribuidora de bebidas.<br>
 
-# Detalhes sobre o projeto!
+# Detalhes do projeto!
 
 Ter acesso via login: tanto clientes como pessoas vendedoras, assim como o administrador do sistema, devem ter acesso ao aplicativo via login, porém para funções diferentes: (1) A pessoa cliente, que compra da lista de produtos; (2) A pessoa vendedora, que aprova, prepara e entrega; (3) A pessoa administradora, que gerencia quem usa o aplicativo.
 Em resumo sera feito a comunicação entre clientes e pessoas vendedoras: a pessoa cliente faz o pedido via "carrinho de compras" e a pessoa vendedora aprova, prepara e envia esse pedido. Quando o produto é recebido por quem comprou, essa pessoa marca o pedido como "recebido". Ambos devem possuir detalhes sobre seus pedidos.
